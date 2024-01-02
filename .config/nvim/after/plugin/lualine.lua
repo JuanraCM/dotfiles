@@ -1,7 +1,7 @@
 require('lualine').setup {
   options = {
-    icons_enabled = false,
-    theme = 'horizon',
+    icons_enabled = true,
+    theme = 'catppuccin',
     component_separators = '|',
     section_separators = '',
   },
