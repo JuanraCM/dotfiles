@@ -28,3 +28,9 @@ vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, { desc = 'Format file if LS
 
 -- Deletes without saving into register
 vim.keymap.set({ 'n', 'v' }, 'D', '"_d')
+
+-- Create a new file with a given type
+vim.keymap.set('n', '<leader>n', function()
+  local filetype = vim.fn.input('Enter the desired filetype: ')
+  vim.cmd('tabnew | setlocal filetype=' .. filetype)
+end)
