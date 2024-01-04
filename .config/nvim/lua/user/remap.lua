@@ -34,3 +34,10 @@ vim.keymap.set('n', '<leader>n', function()
   local filetype = vim.fn.input('Enter the desired filetype: ')
   vim.cmd('tabnew | setlocal filetype=' .. filetype)
 end)
+
+-- Adds matching braces
+vim.api.nvim_set_keymap('i', '{', '{}<Esc>i', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '(', '()<Esc>i', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '[', '[]<Esc>i', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', "'", "''<Esc>i", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '"', '""<Esc>i', { noremap = true, silent = true })
