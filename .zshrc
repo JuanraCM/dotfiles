@@ -23,7 +23,7 @@ zinit light romkatv/powerlevel10k
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # GPG TTY config for passprhase prompt
-export GPG_TTY=$(tty)
+export GPG_TTY=$TTY
 
 # Enable substitution in the prompt.
 setopt prompt_subst
