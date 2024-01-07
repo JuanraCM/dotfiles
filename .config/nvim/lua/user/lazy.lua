@@ -117,8 +117,6 @@ require('lazy').setup({
     build = ':TSUpdate',
   },
 
-  { 'akinsho/toggleterm.nvim', version = "*", config = true },
-
   { 'sindrets/diffview.nvim' },
 
   { 'nvim-tree/nvim-tree.lua' },
