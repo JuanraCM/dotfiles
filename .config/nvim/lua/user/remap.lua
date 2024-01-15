@@ -26,8 +26,8 @@ vim.keymap.set('n', 'N', 'Nzzzv')
 -- Format shortcut
 vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, { desc = 'Format file if LSP attached' })
 
--- Deletes without saving into register
-vim.keymap.set({ 'n', 'v' }, 'D', '"_d')
+-- Paste without replacing current register
+vim.keymap.set('x', '<leader>p', [["_dP]], { desc = 'Paste without replacing current register' })
 
 -- Create a new file with a given type
 vim.keymap.set('n', '<leader>n', function()
