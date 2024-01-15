@@ -8,12 +8,23 @@ require('telescope').setup {
         ['<C-d>'] = false,
       },
     },
-    file_ignore_patterns = { '.git', '.node_modules' }
+    file_ignore_patterns = { '.git', '.node_modules' },
+    vimgrep_arguments = {
+      'rg',
+      '--color=never',
+      '--no-heading',
+      '--with-filename',
+      '--line-number',
+      '--column',
+      '--smart-case',
+      '--hidden'
+    }
   },
 }
 
--- Enable telescope fzf native, if installed
+-- Enable telescope extensions
 pcall(require('telescope').load_extension, 'fzf')
+pcall(require('telescope').load_extension, 'live_grep_args')
 
 -- Telescope live_grep in git root
 -- Function to find the git root directory based on the current buffer's path
@@ -67,8 +78,8 @@ vim.keymap.set('n', '<leader>sf', function ()
 end, { desc = '[S]earch [F]iles' })
 
 vim.keymap.set('n', '<leader>sg', function ()
-  require('telescope.builtin').live_grep({ hidden = true })
-end, { desc = '[S]earch by [G]rep' })
+  require('telescope').extensions.live_grep_args.live_grep_args({ hidden = true })
+end, { desc = '[S]earch by [G]rep with Args' })
 
 vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
