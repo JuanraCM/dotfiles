@@ -27,3 +27,6 @@ export GPG_TTY=$TTY
 
 # Enable substitution in the prompt.
 setopt prompt_subst
+
+# Load RVM if installed
+[[ -s '/etc/profile.d/rvm.sh' ]] && source '/etc/profile.d/rvm.sh'
