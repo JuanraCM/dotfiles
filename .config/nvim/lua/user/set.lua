@@ -3,7 +3,7 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 -- Set relative numbers
-vim.opt.relativenumber = true
+-- vim.opt.relativenumber = true
 
 -- Set tab config to 2 spaces
 vim.opt.tabstop = 2

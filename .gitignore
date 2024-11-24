@@ -1,1 +1,3 @@
 .local/share/fonts/.uuid
+.local/share/nvim
+.local/state

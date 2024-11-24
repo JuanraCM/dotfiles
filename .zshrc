@@ -30,3 +30,19 @@ setopt prompt_subst
 
 # Load RVM if installed
 [[ -s '/etc/profile.d/rvm.sh' ]] && source '/etc/profile.d/rvm.sh'
+
+# Load NVM if installed
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Load custom profile if exists
+[[ -s $HOME/.custom-profile ]] && source $HOME/.custom-profile
+
+# Custom aliases
+alias gpull='git pull origin $(git rev-parse --abbrev-ref HEAD)'
+alias gpush='git push origin $(git rev-parse --abbrev-ref HEAD)'
+alias gpushf='git push -f origin $(git rev-parse --abbrev-ref HEAD)'
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
