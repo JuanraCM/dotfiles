@@ -16,6 +16,6 @@ vim.keymap.set('n', 'N', 'Nzzzv')
 vim.keymap.set('x', '<leader>p', [["_dP]], { desc = 'Paste without replacing current register' })
 
 -- Buffer navigation
-vim.keymap.set('n', 'bn', ':bnext<enter>', { desc = 'Go to next buffer' })
-vim.keymap.set('n', 'bp', ':bprevious<enter>', { desc = 'Go to previous buffer' })
-vim.keymap.set('n', 'bd', ':bdelete<enter>', { desc = 'Delete current buffer' })
+vim.keymap.set('n', 'gb', ':bnext<enter>', { desc = 'Go to next buffer' })
+vim.keymap.set('n', 'gp', ':bprevious<enter>', { desc = 'Go to previous buffer' })
+vim.keymap.set('n', 'Q', ':bdelete<enter>', { desc = 'Delete current buffer' })
