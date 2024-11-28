@@ -7,6 +7,9 @@ vim.bo.softtabstop = 2
 -- Built-in smartindent
 vim.opt.smartindent = true
 
+-- Set highlight on search
+vim.o.hlsearch = false
+
 -- Make line numbers default
 vim.wo.number = true
 

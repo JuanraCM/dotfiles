@@ -4,7 +4,15 @@ return {
   config = function ()
     require('lualine').setup({
       options = {
-        icons_enabled = true
+        icons_enabled = true,
+        theme = 'catppuccin',
+        component_separators = '|',
+        section_separators = ''
+      },
+      sections = {
+        lualine_a = {
+          { 'buffers' }
+        }
       }
     })
   end
