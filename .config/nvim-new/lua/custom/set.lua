@@ -36,5 +36,8 @@ vim.o.timeoutlen = 300
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
+-- Set completeopt to have a better completion experience
+vim.o.completeopt = 'menuone,noselect'
+
 -- Leave lines of margin when scrolling
 vim.opt.scrolloff = 8
