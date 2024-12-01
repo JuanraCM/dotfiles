@@ -3,6 +3,7 @@ return {
   version = "*",
   dependencies = 'nvim-tree/nvim-web-devicons',
   config = function ()
-    require('bufferline').setup({})
+    local highlights = require('rose-pine.plugins.bufferline')
+    require('bufferline').setup({ highlights = highlights })
   end
 }
