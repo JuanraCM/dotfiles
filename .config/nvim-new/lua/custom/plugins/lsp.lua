@@ -22,9 +22,17 @@ return {
 
     local servers = {
       lua_ls = {},
-      ruby_lsp = {},
+      solargraph = {},
       rubocop = {}
     }
+
+    local function on_attach(_, buffer_n)
+      local builtin = require('telescope.builtin')
+
+      vim.keymap.set('n', '<leader>gd', builtin.lsp_definitions, { buffer = buffer_n, desc = '[LSP] Telescope go to definition' })
+      vim.keymap.set('n', '<leader>ss', builtin.lsp_document_symbols, { buffer = buffer_n, desc = '[LSP] Telescope search document symbols' })
+      vim.keymap.set('n', '<leader>sS', builtin.lsp_workspace_symbols, { buffer = buffer_n, desc = '[LSP] Telescope search workspace symbols' })
+    end
 
     -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
     local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -36,7 +44,7 @@ return {
 
     lsp_config.setup_handlers({
       function (server_name)
-        local server_setup = { capabilities = capabilities }
+        local server_setup = { capabilities = capabilities, on_attach = on_attach }
         for key,value in pairs(servers[server_name]) do
           server_setup[key] = value
         end
