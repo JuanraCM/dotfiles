@@ -4,9 +4,11 @@ return {
     'hrsh7th/cmp-path',
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-nvim-lsp',
+    'onsails/lspkind.nvim'
   },
   config = function ()
     local cmp = require('cmp')
+    local lspkind = require('lspkind')
 
     cmp.setup({
       mapping = cmp.mapping.preset.insert {
@@ -27,8 +29,19 @@ return {
         end, { 'i', 's' })
       },
       sources = {
+        { name = 'lazydev', group_index = 0 },
         { name = 'nvim_lsp' },
         { name = 'buffer' }
+      },
+      formatting = {
+        expandable_indicator = true,
+        fields = { 'abbr', 'kind', 'menu' },
+        format = lspkind.cmp_format({
+          menu = {
+            nvim_lsp = '[LSP]',
+            buffer = '[BUF]'
+          }
+        })
       }
     })
   end
