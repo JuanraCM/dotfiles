@@ -34,6 +34,7 @@ return {
       vim.keymap.set('n', '<leader>sg', builtin.git_files, { desc = 'Telescope find git files' })
       vim.keymap.set('n', '<leader>sc', builtin.git_bcommits, { desc = "Telescope find buffer's git commits" })
       vim.keymap.set('n', '<leader>sC', builtin.git_commits, { desc = "Telescope find git commits" })
+      vim.keymap.set('n', '<leader>sb', builtin.git_branches, { desc = "Telescope find git branches" })
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = 'Telescope find help tags' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = 'Telescope find keymaps' })
       vim.keymap.set('n', '<leader>/', function()
