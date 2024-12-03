@@ -30,6 +30,7 @@ return {
       },
       sources = {
         { name = 'lazydev', group_index = 0 },
+        { name = 'codeium' },
         { name = 'nvim_lsp' },
         { name = 'buffer' }
       },
@@ -38,8 +39,13 @@ return {
         fields = { 'abbr', 'kind', 'menu' },
         format = lspkind.cmp_format({
           menu = {
+            lazydev = '[DEV]',
             nvim_lsp = '[LSP]',
-            buffer = '[BUF]'
+            buffer = '[BUF]',
+            codeium = '[IA]'
+          },
+          symbol_map = {
+            Codeium = '󱡄'
           }
         })
       }
