@@ -1,4 +1,4 @@
--- Creates a temporary lua sandbox buffer that executes on <C-x>
+-- Creates a temporary sandbox buffer that executes Lua code
 vim.api.nvim_create_user_command("Sandbox", function (_)
   local buf = vim.api.nvim_create_buf(true, false)
 
@@ -7,5 +7,6 @@ vim.api.nvim_create_user_command("Sandbox", function (_)
   vim.api.nvim_set_option_value("buftype", "nofile", { buf = buf })
   vim.api.nvim_set_current_buf(buf)
 
-  vim.keymap.set("n", "<C-x>", ":so<CR>", { buffer = buf, desc = "Sandbox: Run sandbox file as lua code" })
+  vim.keymap.set("n", "<leader>x", ":so<CR>", { buffer = buf, desc = "Sandbox: Run code" })
+  vim.keymap.set("v", "<leader>x", ":lua<CR>", { buffer = buf, desc = "Sandbox: Run selected code" })
 end, {})
