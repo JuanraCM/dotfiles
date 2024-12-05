@@ -1,3 +1,8 @@
+-- Deletes buffer
+vim.api.nvim_create_user_command("Q", function (evt)
+  vim.cmd({ cmd = "bdelete", bang = evt.bang })
+end, { bang = true })
+
 -- Creates a temporary sandbox buffer that executes Lua code
 vim.api.nvim_create_user_command("Sandbox", function (_)
   local buf = vim.api.nvim_create_buf(true, false)

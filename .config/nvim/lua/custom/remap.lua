@@ -18,4 +18,3 @@ vim.keymap.set('x', '<leader>p', [["_dP]], { desc = 'Paste without replacing cur
 -- Buffer navigation
 vim.keymap.set('n', 'gb', ':bnext<cr>', { desc = 'Go to next buffer' })
 vim.keymap.set('n', 'gp', ':bprevious<cr>', { desc = 'Go to previous buffer' })
-vim.keymap.set('n', ':Q', ':bdelete', { desc = 'Delete current buffer' })
