@@ -6,6 +6,8 @@ return {
     config = function ()
       local telescope = require('telescope')
       local builtin = require('telescope.builtin')
+      local actions = require('telescope.actions')
+      local state = require('telescope.actions.state')
 
       telescope.setup({
         defaults = {
@@ -21,6 +23,21 @@ return {
             '--hidden'
           }
         },
+        pickers = {
+          git_commits = {
+            mappings = {
+              i = {
+                ['<c-v>'] = function(prompt_bufnr)
+                  local entry = state.get_selected_entry()
+                  local commit_hash = entry.value
+
+                  actions.close(prompt_bufnr)
+                  vim.cmd('vertical Git show ' .. commit_hash)
+                end
+              }
+            }
+          },
+        }
       })
 
       pcall(telescope.load_extension, 'fzf')
