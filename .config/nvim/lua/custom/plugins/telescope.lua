@@ -54,6 +54,16 @@ return {
       vim.keymap.set('n', '<leader>sb', builtin.git_branches, { desc = "Telescope find git branches" })
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = 'Telescope find help tags' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = 'Telescope find keymaps' })
+      vim.keymap.set('n', '<leader>sn', function ()
+        builtin.find_files {
+          cwd = vim.fn.stdpath('config')
+        }
+      end, { desc = 'Telescope search nvim config' })
+      vim.keymap.set('n', '<leader>sp', function ()
+        builtin.find_files {
+          cwd = vim.fs.joinpath(vim.fn.stdpath('data'), 'lazy')
+        }
+      end, { desc = 'Telescope search nvim config' })
       vim.keymap.set('n', '<leader>/', function()
         builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
           winblend = 10,
