@@ -23,7 +23,8 @@ return {
     local servers = {
       lua_ls = {},
       solargraph = {},
-      rubocop = {}
+      rubocop = {},
+      rust_analyzer = {}
     }
 
     local function on_attach(_, buffer_n)
