@@ -8,6 +8,7 @@ return {
       local builtin = require('telescope.builtin')
       local actions = require('telescope.actions')
       local state = require('telescope.actions.state')
+      local custom = require('custom.telescope')
 
       telescope.setup({
         defaults = {
@@ -45,7 +46,7 @@ return {
       vim.keymap.set('n', '<leader>sf', function ()
         builtin.find_files({ hidden = true })
       end, { desc = 'Telescope find files' })
-      vim.keymap.set('n', '<leader>sa', builtin.live_grep, { desc = 'Telescope live grep' })
+      vim.keymap.set('n', '<leader>sa', custom.live_multigrep, { desc = 'Telescope live multigrep' })
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = 'Telescope grep word under cursor' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = 'Telescope buffers' })
       vim.keymap.set('n', '<leader>sg', builtin.git_files, { desc = 'Telescope find git files' })
