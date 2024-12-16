@@ -3,6 +3,11 @@ vim.api.nvim_create_user_command("Q", function (evt)
   vim.cmd({ cmd = "bdelete", bang = evt.bang })
 end, { bang = true })
 
+-- Deletes all buffer
+vim.api.nvim_create_user_command("Qall", function (evt)
+  vim.cmd("%bdelete" .. (evt.bang and "!" or ""))
+end, { bang = true })
+
 -- Remaps for executing code when editing Lua files
 vim.api.nvim_create_autocmd("FileType", {
   group = vim.api.nvim_create_augroup("ExecLuaCodeKeymaps", { clear = true }),
