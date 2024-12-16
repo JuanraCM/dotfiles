@@ -33,6 +33,7 @@ return {
       vim.keymap.set('n', '<leader>gd', builtin.lsp_definitions, { buffer = buffer_n, desc = '[LSP] Telescope go to definition' })
       vim.keymap.set('n', '<leader>ss', builtin.lsp_document_symbols, { buffer = buffer_n, desc = '[LSP] Telescope search document symbols' })
       vim.keymap.set('n', '<leader>sS', builtin.lsp_workspace_symbols, { buffer = buffer_n, desc = '[LSP] Telescope search workspace symbols' })
+      vim.keymap.set('n', '<leader>sr', builtin.lsp_references, { buffer = buffer_n, desc = '[LSP] Telescope search references word under cursor' })
     end
 
     -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
