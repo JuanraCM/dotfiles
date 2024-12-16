@@ -39,10 +39,8 @@ export NVM_DIR="$HOME/.nvm"
 # Load custom profile if exists
 [[ -s $HOME/.custom-profile ]] && source $HOME/.custom-profile
 
-# Custom aliases
-alias gpull='git pull origin $(git rev-parse --abbrev-ref HEAD)'
-alias gpush='git push origin $(git rev-parse --abbrev-ref HEAD)'
-alias gpushf='git push -f origin $(git rev-parse --abbrev-ref HEAD)'
+# Git alias
+alias g='git'
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
