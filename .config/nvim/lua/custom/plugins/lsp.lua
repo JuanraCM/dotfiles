@@ -26,6 +26,20 @@ return {
       rubocop = {},
       rust_analyzer = {}
     }
+    local ensure_installed = { 'lua_ls' }
+
+    local lspconfig = require('lspconfig')
+    lspconfig.util.on_setup = lspconfig.util.add_hook_before(lspconfig.util.on_setup, function(config)
+      local cwd = vim.fn.getcwd()
+
+      if string.find(cwd, "/Tirant/") then
+        local dockerized_project = lspconfig.util.root_pattern('Dockerfile', 'docker-compose.yml')(cwd)
+
+        if dockerized_project and config.name == 'rubocop' then
+          config.cmd = { 'docker' ,'compose', 'exec', 'app', 'rubocop', '--lsp' }
+        end
+      end
+    end)
 
     local function on_attach(_, buffer_n)
       local builtin = require('telescope.builtin')
@@ -36,17 +50,15 @@ return {
       vim.keymap.set('n', '<leader>sr', builtin.lsp_references, { buffer = buffer_n, desc = '[LSP] Telescope search references word under cursor' })
     end
 
-    -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
+    -- nvim-cmp capabilities (replaced by blink for now)
     -- local capabilities = vim.lsp.protocol.make_client_capabilities()
     -- capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
     local capabilities = require('blink.cmp').get_lsp_capabilities()
 
-    local lsp_config = require('mason-lspconfig')
-
-    lsp_config.setup({ ensure_installed = vim.tbl_keys(servers) })
-
-    lsp_config.setup_handlers({
+    local mason_lspconfig = require('mason-lspconfig')
+    mason_lspconfig.setup({ ensure_installed = ensure_installed })
+    mason_lspconfig.setup_handlers({
       function (server_name)
         local server_setup = { capabilities = capabilities, on_attach = on_attach }
         for key,value in pairs(servers[server_name]) do
