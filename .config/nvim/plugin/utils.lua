@@ -29,3 +29,10 @@ vim.api.nvim_create_user_command("Sandbox", function (evt)
   vim.api.nvim_set_current_buf(buf)
 end, { nargs = 1 })
 
+-- Hightlight on yank
+vim.api.nvim_create_autocmd("TextYankPost", {
+  group = vim.api.nvim_create_augroup("HighlightOnYank", { clear = true }),
+  callback = function (_)
+    vim.highlight.on_yank()
+  end
+})
