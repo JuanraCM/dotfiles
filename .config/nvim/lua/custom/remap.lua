@@ -18,3 +18,8 @@ vim.keymap.set('x', '<leader>p', [["_dP]], { desc = 'Paste without replacing cur
 -- Buffer navigation
 vim.keymap.set('n', 'gb', ':bnext<cr>', { desc = 'Go to next buffer' })
 vim.keymap.set('n', 'gp', ':bprevious<cr>', { desc = 'Go to previous buffer' })
+
+-- Toggle relative numbers
+vim.keymap.set('n', '<leader>tr', function ()
+  vim.o.relativenumber = not vim.o.relativenumber
+end, { desc = 'Toggle relative numbers' })
