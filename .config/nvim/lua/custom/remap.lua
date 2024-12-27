@@ -21,5 +21,5 @@ vim.keymap.set('n', 'gp', ':bprevious<cr>', { desc = 'Go to previous buffer' })
 
 -- Toggle relative numbers
 vim.keymap.set('n', '<leader>tr', function ()
-  vim.o.relativenumber = not vim.o.relativenumber
+  vim.wo.relativenumber = not vim.wo.relativenumber
 end, { desc = 'Toggle relative numbers' })
