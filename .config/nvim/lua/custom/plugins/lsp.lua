@@ -36,7 +36,7 @@ return {
         local dockerized_project = lspconfig.util.root_pattern('Dockerfile', 'docker-compose.yml')(cwd)
 
         if dockerized_project and config.name == 'rubocop' then
-          config.cmd = { 'docker' ,'compose', 'exec', 'app', 'rubocop', '--lsp' }
+          config.cmd = { require('custom.utils').script_path('docker-rubocop'), '--lsp' }
         end
       end
     end)
