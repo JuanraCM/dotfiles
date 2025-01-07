@@ -1,4 +1,3 @@
-
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -19,11 +18,13 @@ vim.opt.rtp:prepend(lazypath)
 -- Setup lazy.nvim
 require("lazy").setup({
   -- Import plugins from `lua/config/plugins/` folder
-  import = "custom/plugins",
+  spec = {
+    import = "custom/plugins",
+  },
   -- Colorscheme that will be used when installing plugins
   install = { colorscheme = { "habamax" } },
   -- Automatically check for plugin updates
   checker = { enabled = true },
   -- Disable changes notification
-  change_detection = { enabled = false }
+  change_detection = { notify = false },
 })
