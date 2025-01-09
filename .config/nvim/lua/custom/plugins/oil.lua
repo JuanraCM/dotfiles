@@ -12,7 +12,7 @@ return {
       },
     })
 
-    vim.keymap.set("n", "-", "<CMD>Oil --float<CR>", { desc = "Open parent directory" })
+    vim.keymap.set("n", "-", "<cmd>Oil<cr>", { desc = "Open parent directory" })
 
     vim.api.nvim_create_autocmd("FileType", {
       group = vim.api.nvim_create_augroup("OilTelescope", { clear = true }),
