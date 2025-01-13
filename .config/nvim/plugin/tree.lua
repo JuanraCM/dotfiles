@@ -14,14 +14,33 @@ local function build_tree(lines)
   return tree
 end
 
+local function sorted_entries(tree)
+  local entries = vim.tbl_keys(tree)
+  table.sort(entries)
+
+  local dirs, files = {}, {}
+
+  for _, entry in ipairs(entries) do
+    local list = next(tree[entry]) and dirs or files
+    table.insert(list, entry)
+  end
+
+  return vim.list_extend(dirs, files)
+end
+
 local function format_tree(tree, prefix)
   local lines = {}
+  local entries = sorted_entries(tree)
 
-  for name, children in pairs(tree) do
-    table.insert(lines, prefix .. name)
+  for _, entry in ipairs(entries) do
+    local to_insert = prefix .. entry
+    local children = tree[entry]
 
-    if type(children) == "table" and next(children) then
-      vim.list_extend(lines, format_tree(children, prefix .. "|  "))
+    if next(children) then
+      table.insert(lines, to_insert .. "/")
+      vim.list_extend(lines, format_tree(children, prefix .. "▎  "))
+    else
+      table.insert(lines, to_insert)
     end
   end
 
