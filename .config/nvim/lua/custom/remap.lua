@@ -23,5 +23,10 @@ vim.keymap.set("n", "<leader>tr", function()
   vim.wo.relativenumber = not vim.wo.relativenumber
 end, { desc = "Toggle relative numbers" })
 
+-- Toggle line wrap
+vim.keymap.set("n", "<leader>tw", function()
+  vim.wo.wrap = not vim.wo.wrap
+end, { desc = "Toggle line wrap" })
+
 -- Yank relative file path to system clipboard
 vim.keymap.set("n", "<leader>yf", ':let @+ = expand("%")<cr>', { desc = "Yank file path to clipboard" })
