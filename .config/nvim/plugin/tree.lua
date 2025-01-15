@@ -1,3 +1,5 @@
+local icons = require("mini.icons")
+
 local function build_tree(lines)
   local tree = {}
 
@@ -28,45 +30,54 @@ local function sorted_entries(tree)
   return vim.list_extend(dirs, files)
 end
 
--- TEMP
-local current_line = 0
-local highlights = {}
---
-local function format_tree(tree, prefix)
+local function get_icon(entry_name, is_dir)
+  local category = is_dir and "directory" or "extension"
+  local icon, hl_group = icons.get(category, entry_name)
+
+  return icon .. " ", hl_group
+end
+
+local function format_tree(original_tree)
   local lines = {}
-  local entries = sorted_entries(tree)
+  local highlights = {}
 
-  for _, entry in ipairs(entries) do
-    local to_insert = prefix .. entry
-    local children = tree[entry]
-    local is_dir = next(children)
+  local function format_lines(tree, prefix)
+    local entries = sorted_entries(tree)
 
-    table.insert(highlights, { "Comment", current_line, 0, #prefix })
-    if is_dir then
-      table.insert(highlights, { "Directory", current_line, #prefix, -1 })
+    for _, entry in ipairs(entries) do
+      local children = tree[entry]
+      local is_dir = next(children)
+
+      entry = is_dir and entry .. "/" or entry
+      local icon, icon_hl = get_icon(entry, is_dir)
+
+      table.insert(lines, prefix .. icon .. entry)
+      table.insert(highlights, { "Comment", #lines - 1, 0, #prefix })
+      table.insert(highlights, { icon_hl, #lines - 1, #prefix, #prefix + #icon })
+      if is_dir then
+        table.insert(highlights, { "Directory", #lines - 1, #prefix + #icon, -1 })
+        format_lines(children, prefix .. "▎  ")
+      else
+      end
     end
-    current_line = current_line + 1
 
-    if is_dir then
-      table.insert(lines, to_insert .. "/")
-      vim.list_extend(lines, format_tree(children, prefix .. "▎  "))
-    else
-      table.insert(lines, to_insert)
-    end
+    return lines
   end
 
-  return lines
+  format_lines(original_tree, "")
+
+  return lines, highlights
 end
 
 local function show_tree()
   local output = vim.fn.system("git ls-files")
-  local lines = vim.split(output, "\n", { trimempty = true })
-  local tree = build_tree(lines)
-  local formatted = format_tree(tree, "")
+  local raw_lines = vim.split(output, "\n", { trimempty = true })
+  local tree = build_tree(raw_lines)
 
+  local lines, highlights = format_tree(tree)
   local buf = vim.api.nvim_create_buf(false, true)
 
-  vim.api.nvim_buf_set_lines(buf, 0, -1, false, formatted)
+  vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
 
   local ns = vim.api.nvim_create_namespace("ShowTree")
   for _, hl in ipairs(highlights) do
