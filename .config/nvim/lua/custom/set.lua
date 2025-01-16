@@ -18,10 +18,10 @@ vim.o.hlsearch = false
 vim.wo.number = true
 
 -- Enable mouse mode
-vim.o.mouse = 'a'
+vim.o.mouse = "a"
 
 -- Sync clipboard between OS and Neovim.
-vim.o.clipboard = 'unnamedplus'
+vim.o.clipboard = "unnamedplus"
 
 -- Save undo history
 vim.o.undofile = true
@@ -31,7 +31,7 @@ vim.o.ignorecase = true
 vim.o.smartcase = true
 
 -- Keep signcolumn on by default
-vim.wo.signcolumn = 'yes'
+vim.wo.signcolumn = "yes"
 
 -- Decrease update time
 vim.o.updatetime = 250
@@ -41,7 +41,20 @@ vim.o.timeoutlen = 300
 vim.o.termguicolors = true
 
 -- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menuone,noselect'
+vim.o.completeopt = "menuone,noselect"
 
 -- Leave lines of margin when scrolling
 vim.opt.scrolloff = 8
+
+-- Prettier fold text
+function _G.custom_foldtext()
+  local line = vim.fn.getline(vim.v.foldstart)
+  local line_count = vim.v.foldend - vim.v.foldstart + 1
+
+  return line .. "..." .. ": " .. line_count .. " lines"
+end
+
+vim.opt.foldtext = "v:lua.custom_foldtext()"
+
+-- Custom fillchars
+vim.opt.fillchars = { fold = " " }
