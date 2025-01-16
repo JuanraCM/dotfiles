@@ -39,9 +39,10 @@ end
 
 local function format_tree(original_tree)
   local lines = {}
+  local paths = {}
   local highlights = {}
 
-  local function format_lines(tree, prefix)
+  local function format_lines(tree, prefix, path)
     local entries = sorted_entries(tree)
 
     for _, entry in ipairs(entries) do
@@ -52,21 +53,22 @@ local function format_tree(original_tree)
       local icon, icon_hl = get_icon(entry, is_dir)
 
       table.insert(lines, prefix .. icon .. entry)
+      table.insert(paths, path .. entry)
       table.insert(highlights, { "Comment", #lines - 1, 0, #prefix })
       table.insert(highlights, { icon_hl, #lines - 1, #prefix, #prefix + #icon })
+
       if is_dir then
         table.insert(highlights, { "Directory", #lines - 1, #prefix + #icon, -1 })
-        format_lines(children, prefix .. "▎  ")
-      else
+        format_lines(children, prefix .. "▎  ", path .. entry)
       end
     end
 
     return lines
   end
 
-  format_lines(original_tree, "")
+  format_lines(original_tree, "", "")
 
-  return lines, highlights
+  return lines, paths, highlights
 end
 
 local function show_tree()
@@ -74,18 +76,41 @@ local function show_tree()
   local raw_lines = vim.split(output, "\n", { trimempty = true })
   local tree = build_tree(raw_lines)
 
-  local lines, highlights = format_tree(tree)
+  local lines, paths, highlights = format_tree(tree)
   local buf = vim.api.nvim_create_buf(false, true)
 
   vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
 
-  local ns = vim.api.nvim_create_namespace("ShowTree")
+  local ns = vim.api.nvim_create_namespace("Tree")
+  local augroup = vim.api.nvim_create_augroup("Tree", { clear = true })
+
   for _, hl in ipairs(highlights) do
     vim.api.nvim_buf_add_highlight(buf, ns, unpack(hl))
   end
+
+  vim.api.nvim_create_autocmd("CursorMoved", {
+    group = augroup,
+    buffer = buf,
+    callback = function(_)
+      local lnum = vim.api.nvim_win_get_cursor(0)[1]
+      local path = paths[lnum]
+
+      vim.api.nvim_buf_set_extmark(buf, ns, lnum - 1, -1, {
+        id = 1,
+        virt_text = { { path, "Comment" } },
+      })
+    end,
+  })
+
+  vim.keymap.set("n", "<cr>", function()
+    local lnum = vim.api.nvim_win_get_cursor(0)[1]
+    local path = paths[lnum]
+
+    vim.cmd(":e " .. path)
+  end, { buffer = buf })
 
   vim.api.nvim_set_option_value("modifiable", false, { buf = buf })
   vim.api.nvim_set_current_buf(buf)
 end
 
-vim.api.nvim_create_user_command("ShowTree", show_tree, {})
+vim.api.nvim_create_user_command("Tree", show_tree, {})
