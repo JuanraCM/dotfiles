@@ -6,7 +6,7 @@ return {
       providers = {
         openai = {},
         googleai = {
-          endpoint = "https://generativelanguage.googleapis.com/v1beta/models/{{model}}:generateContent?key={{secret}}",
+          endpoint = "https://generativelanguage.googleapis.com/v1beta/models/{{model}}:streamGenerateContent?key={{secret}}",
           secret = os.getenv("GOOGLEAI_API_KEY"),
         },
       },
