@@ -1,8 +1,5 @@
 return {
   "saghen/blink.cmp",
-  dependencies = {
-    "rafamadriz/friendly-snippets",
-  },
   version = "v0.*",
   opts = {
     keymap = { preset = "default" },
@@ -10,14 +7,10 @@ return {
       use_nvim_cmp_as_default = true,
       nerd_font_variant = "mono",
     },
+    snippets = { preset = "luasnip" },
     sources = {
       default = { "lsp", "path", "snippets", "buffer", "lazydev" },
       providers = {
-        snippets = {
-          opts = {
-            search_paths = { vim.fn.stdpath("config") .. "/lua/custom/snippets" },
-          },
-        },
         lazydev = {
           name = "LazyDev",
           module = "lazydev.integrations.blink",
