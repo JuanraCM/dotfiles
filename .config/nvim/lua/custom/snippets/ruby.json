@@ -1,0 +1,11 @@
+{
+  "Debug with print statements": {
+    "prefix": "dbg",
+    "body": [
+      "p '##### DEBUG #####'",
+      "p $1",
+      "p '##### DEBUG #####'"
+    ]
+  }
+ }
+}
