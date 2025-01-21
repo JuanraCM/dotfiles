@@ -7,7 +7,7 @@ local snippets = {
         p {}
         p '##### DEBUG #####'
       ]],
-      i(1)
+      { i(1) }
     )
   ),
 }
