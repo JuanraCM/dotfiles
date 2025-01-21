@@ -4,7 +4,17 @@ local function nodes_blueprinter(args)
   local nodes = {}
 
   for pos = 1, nodecount do
-    table.insert(nodes, i(pos, "i(" .. pos .. ")"))
+    table.insert(
+      nodes,
+      c(pos, {
+        t(("i(%s)"):format(pos)),
+        t(('i(%s, "placeholder")'):format(pos)),
+        t('t("text")'),
+        t("f(fn)"),
+        t("f(fn, { pos })"),
+      })
+    )
+
     table.insert(nodes, t(", "))
   end
 
