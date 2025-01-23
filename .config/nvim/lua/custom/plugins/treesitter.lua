@@ -4,6 +4,7 @@ return {
   build = ":TSUpdate",
   config = function()
     local configs = require("nvim-treesitter.configs")
+    local query = require("vim.treesitter.query")
 
     configs.setup({
       ensure_installed = { "lua", "ruby" },
@@ -23,5 +24,11 @@ return {
         },
       },
     })
+
+    query.add_directive("set-lang-from-filename!", function(_, _, bufnr, _, metadata)
+      local filename = vim.api.nvim_buf_get_name(bufnr):match("([^/]+)%.lua$")
+
+      metadata["injection.language"] = filename
+    end, { force = true, all = false })
   end,
 }
