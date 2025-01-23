@@ -18,7 +18,7 @@ return {
           chat = true,
           command = false,
           model = { model = "gemini-1.5-flash" },
-          system_prompt = require("gp.defaults").chat_system_prompt,
+          system_prompt = "You are a general AI assistant.",
         },
       },
     })
