@@ -2,11 +2,10 @@ return {
   "robitx/gp.nvim",
   config = function()
     require("gp").setup({
-      openai_api_key = "",
+      openai_api_key = os.getenv("DEEPSEEK_API_KEY"),
       providers = {
         openai = {
           endpoint = "https://api.deepseek.com/chat/completions",
-          secret = os.getenv("DEEPSEEK_API_KEY"),
         },
         googleai = {
           endpoint = "https://generativelanguage.googleapis.com/v1beta/models/{{model}}:streamGenerateContent?key={{secret}}",
