@@ -44,29 +44,29 @@ return {
 
       pcall(telescope.load_extension, "fzf")
 
-      vim.keymap.set("n", "<leader>sf", function()
+      vim.keymap.set("n", "<leader>ff", function()
         builtin.find_files({ hidden = true })
       end, { desc = "Telescope find files" })
-      vim.keymap.set("n", "<leader>sa", custom.live_multigrep, { desc = "Telescope live multigrep" })
-      vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "Telescope grep word under cursor" })
+      vim.keymap.set("n", "<leader>fa", custom.live_multigrep, { desc = "Telescope live multigrep" })
+      vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "Telescope grep word under cursor" })
       vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "Telescope buffers" })
-      vim.keymap.set("n", "<leader>sg", builtin.git_files, { desc = "Telescope find git files" })
-      vim.keymap.set("n", "<leader>sc", builtin.git_commits, { desc = "Telescope find git commits" })
-      vim.keymap.set("n", "<leader>sC", builtin.git_bcommits, { desc = "Telescope find buffer's git commits" })
-      vim.keymap.set("n", "<leader>sb", builtin.git_branches, { desc = "Telescope find git branches" })
-      vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "Telescope find help tags" })
-      vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "Telescope find keymaps" })
-      vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "Telescope find diagnostics" })
-      vim.keymap.set("n", "<leader>sn", function()
+      vim.keymap.set("n", "<leader>fg", builtin.git_files, { desc = "Telescope find git files" })
+      vim.keymap.set("n", "<leader>fc", builtin.git_commits, { desc = "Telescope find git commits" })
+      vim.keymap.set("n", "<leader>fC", builtin.git_bcommits, { desc = "Telescope find buffer's git commits" })
+      vim.keymap.set("n", "<leader>fb", builtin.git_branches, { desc = "Telescope find git branches" })
+      vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Telescope find help tags" })
+      vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "Telescope find keymaps" })
+      vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "Telescope find diagnostics" })
+      vim.keymap.set("n", "<leader>fn", function()
         builtin.find_files({
           cwd = vim.fn.stdpath("config"),
         })
-      end, { desc = "Telescope search nvim config" })
-      vim.keymap.set("n", "<leader>sp", function()
+      end, { desc = "Telescope find nvim config" })
+      vim.keymap.set("n", "<leader>fp", function()
         builtin.find_files({
           cwd = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy"),
         })
-      end, { desc = "Telescope search nvim config" })
+      end, { desc = "Telescope find nvim plugins" })
       vim.keymap.set("n", "<leader>/", function()
         builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
           winblend = 10,

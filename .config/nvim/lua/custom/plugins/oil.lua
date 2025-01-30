@@ -20,10 +20,10 @@ return {
       callback = function(evt)
         local cwd = vim.api.nvim_buf_get_name(0):gsub("^oil://", "")
 
-        vim.keymap.set("n", "<leader>sf", function()
+        vim.keymap.set("n", "<leader>ff", function()
           require("telescope.builtin").find_files({ cwd = cwd, hidden = true })
         end, { buffer = evt.buf, desc = "Telescope find files" })
-        vim.keymap.set("n", "<leader>sa", function()
+        vim.keymap.set("n", "<leader>fa", function()
           require("custom.telescope").live_multigrep({ cwd = cwd })
         end, { buffer = evt.buf, desc = "Telescope live multigrep" })
       end,
