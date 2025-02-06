@@ -16,6 +16,9 @@ return {
           module = "lazydev.integrations.blink",
           score_offset = 100,
         },
+        snippets = {
+          score_offset = -2,
+        },
       },
     },
     signature = { enabled = true },

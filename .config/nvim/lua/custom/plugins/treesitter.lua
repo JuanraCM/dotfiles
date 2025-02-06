@@ -12,7 +12,10 @@ return {
       sync_install = false,
       auto_install = true,
       highlight = { enable = true },
-      indent = { enable = true },
+      indent = {
+        enable = true,
+        disable = { "ruby" },
+      },
       modules = {},
       textobjects = {
         select = {
@@ -20,6 +23,10 @@ return {
           keymaps = {
             ["af"] = { query = "@function.outer", desc = "Select the outer part of a function" },
             ["if"] = { query = "@function.inner", desc = "Select the inner part of a function" },
+            ["ac"] = { query = "@class.outer", desc = "Select the outer part of a class" },
+            ["ic"] = { query = "@class.inner", desc = "Select the inner part of a class" },
+            ["ab"] = { query = "@block.outer", desc = "Select the outer part of a block" },
+            ["ib"] = { query = "@block.inner", desc = "Select the inner part of a block" },
           },
         },
       },
