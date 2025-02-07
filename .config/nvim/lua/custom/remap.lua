@@ -34,3 +34,7 @@ vim.keymap.set("n", "<leader>yf", ':let @+ = expand("%")<cr>', { desc = "Yank fi
 -- Substitute remaps
 vim.keymap.set("v", '<leader>s"', ":s/\"/'/g<cr>", { desc = "Replace double quotes with single quotes" })
 vim.keymap.set("v", "<leader>s'", ":s/'/\"/g<cr>", { desc = "Replace single quotes with double quotes" })
+
+-- Remap for dealing with word wrap vertically
+vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
