@@ -1,13 +1,18 @@
 local M = {}
 
-M.script_path = function (fname)
-  local path = {
-    vim.fn.stdpath('config'),
-    'scripts',
-    fname
-  }
+M.script_path = function(fname, env)
+  local path = table.concat({
+    vim.fn.stdpath("config"),
+    "scripts",
+    fname,
+  }, "/")
 
-  return table.concat(path, '/')
+  local formatted_env = ""
+  for key, value in pairs(env) do
+    formatted_env = formatted_env .. key .. "=" .. value .. " "
+  end
+
+  return formatted_env .. path
 end
 
 return M
