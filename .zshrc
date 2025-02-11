@@ -25,27 +25,17 @@ zinit light romkatv/powerlevel10k
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# GPG TTY config for passprhase prompt
-export GPG_TTY=$TTY
-
-# Enable substitution in the prompt.
-setopt prompt_subst
-
-# Load RVM if installed
-[[ -s '/etc/profile.d/rvm.sh' ]] && source '/etc/profile.d/rvm.sh'
-
-# Load NVM if installed
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 # Load custom profile if exists
 [[ -s $HOME/.custom-profile ]] && source $HOME/.custom-profile
+
+# GPG TTY config for passprhase prompt
+export GPG_TTY=$TTY
 
 # Git alias
 alias g='git'
 
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
+# Enable substitution in the prompt
+setopt prompt_subst
 
+# Init zoxide
 eval "$(zoxide init zsh)"
