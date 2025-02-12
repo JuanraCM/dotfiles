@@ -49,6 +49,9 @@ vim.o.completeopt = "menuone,noselect"
 -- Leave lines of margin when scrolling
 vim.opt.scrolloff = 8
 
+-- Split to right
+vim.o.splitright = true
+
 -- Prettier fold text
 function _G.custom_foldtext()
   local line = vim.fn.getline(vim.v.foldstart)

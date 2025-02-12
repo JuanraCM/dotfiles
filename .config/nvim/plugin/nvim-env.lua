@@ -14,3 +14,5 @@ vim.api.nvim_create_autocmd("VimEnter", {
   group = vim.api.nvim_create_augroup("NvimEnvLoad", { clear = true }),
   callback = load_env,
 })
+
+vim.api.nvim_create_user_command("NvimEnvReload", load_env, { desc = "Reload .nvim.env variables" })
