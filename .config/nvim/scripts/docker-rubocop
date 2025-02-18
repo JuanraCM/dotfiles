@@ -1,5 +1,5 @@
 #!/bin/bash
 
-container="${DOCKER_CONTAINER:-app}"
+container="${CONTAINER:-app}"
 
 docker compose exec $container bundle exec rubocop "$@"

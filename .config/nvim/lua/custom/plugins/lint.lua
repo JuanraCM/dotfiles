@@ -9,7 +9,7 @@ return {
     }
 
     lint.linters.rubocop.cmd = cutils.script_path("docker-rubocop", {
-      DOCKER_CONTAINER = vim.env.DOCKER_CONTAINER,
+      CONTAINER = vim.env.DOCKER_CONTAINER,
     })
     lint.linters.rubocop.args = {
       "--format",

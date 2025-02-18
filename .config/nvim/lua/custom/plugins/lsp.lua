@@ -22,8 +22,7 @@ return {
 
     local servers = {
       lua_ls = {},
-      solargraph = {},
-      rubocop = {},
+      ruby_lsp = {},
       rust_analyzer = {},
     }
     local ensure_installed = { "lua_ls" }
@@ -31,12 +30,14 @@ return {
     local lspconfig = require("lspconfig")
     lspconfig.util.on_setup = lspconfig.util.add_hook_before(lspconfig.util.on_setup, function(config)
       local cwd = vim.fn.getcwd()
+      local dockerized_project = lspconfig.util.root_pattern("Dockerfile", "docker-compose.yml")(cwd)
 
-      if string.find(cwd, "/Tirant/") then
-        local dockerized_project = lspconfig.util.root_pattern("Dockerfile", "docker-compose.yml")(cwd)
+      if dockerized_project then
+        local cutils = require("custom.utils")
+        local container = vim.env.DOCKER_CONTAINER
 
-        if dockerized_project and config.name == "rubocop" then
-          config.cmd = { require("custom.utils").script_path("docker-rubocop"), "--lsp" }
+        if config.name == "ruby_lsp" then
+          config.cmd = { cutils.script_path("docker-ruby_lsp", { CONTAINER = container }) }
         end
       end
     end)

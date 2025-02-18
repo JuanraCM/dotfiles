@@ -1,0 +1,5 @@
+#!/bin/bash
+
+container="${CONTAINER:-app}"
+
+docker compose exec $container ruby-lsp
