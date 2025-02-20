@@ -1,7 +1,6 @@
 return {
   "neovim/nvim-lspconfig",
   dependencies = {
-    "williamboman/mason-lspconfig.nvim",
     "williamboman/mason.nvim",
     { "j-hui/fidget.nvim", opts = {} },
     {
@@ -17,77 +16,70 @@ return {
   },
   config = function()
     require("mason").setup()
-    require("mason-lspconfig").setup()
     require("lazydev").setup()
 
     local servers = {
       lua_ls = {},
       ruby_lsp = {},
+      solargraph = {},
       rust_analyzer = {},
     }
-    local ensure_installed = { "lua_ls" }
 
-    local lspconfig = require("lspconfig")
-    lspconfig.util.on_setup = lspconfig.util.add_hook_before(lspconfig.util.on_setup, function(config)
-      local cwd = vim.fn.getcwd()
-      local dockerized_project = lspconfig.util.root_pattern("Dockerfile", "docker-compose.yml")(cwd)
-
-      if dockerized_project then
-        local cutils = require("custom.utils")
-        local container = vim.env.DOCKER_CONTAINER
-
-        if config.name == "ruby_lsp" then
-          config.cmd = { cutils.script_path("docker-ruby_lsp", { CONTAINER = container }) }
-        end
-      end
-    end)
-
-    local function on_attach(_, buffer_n)
+    local capabilities = require("blink.cmp").get_lsp_capabilities()
+    local on_attach = function(_, bufnr)
       local builtin = require("telescope.builtin")
 
       vim.keymap.set(
         "n",
         "<leader>gd",
         builtin.lsp_definitions,
-        { buffer = buffer_n, desc = "[LSP] Telescope go to definition" }
+        { buffer = bufnr, desc = "[LSP] Telescope go to definition" }
       )
       vim.keymap.set(
         "n",
         "<leader>fs",
         builtin.lsp_document_symbols,
-        { buffer = buffer_n, desc = "[LSP] Telescope search document symbols" }
+        { buffer = bufnr, desc = "[LSP] Telescope search document symbols" }
       )
       vim.keymap.set(
         "n",
         "<leader>fS",
         builtin.lsp_workspace_symbols,
-        { buffer = buffer_n, desc = "[LSP] Telescope search workspace symbols" }
+        { buffer = bufnr, desc = "[LSP] Telescope search workspace symbols" }
       )
       vim.keymap.set(
         "n",
         "<leader>fr",
         builtin.lsp_references,
-        { buffer = buffer_n, desc = "[LSP] Telescope search references word under cursor" }
+        { buffer = bufnr, desc = "[LSP] Telescope search references word under cursor" }
       )
     end
 
-    -- nvim-cmp capabilities (replaced by blink for now)
-    -- local capabilities = vim.lsp.protocol.make_client_capabilities()
-    -- capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+    local lspconfig = require("lspconfig")
+    local dockerized = lspconfig.util.root_pattern("Dockerfile", "docker-compose.yml")(vim.fn.getcwd())
 
-    local capabilities = require("blink.cmp").get_lsp_capabilities()
+    if dockerized then
+      local cutils = require("custom.utils")
 
-    local mason_lspconfig = require("mason-lspconfig")
-    mason_lspconfig.setup({ ensure_installed = ensure_installed })
-    mason_lspconfig.setup_handlers({
-      function(server_name)
-        local server_setup = { capabilities = capabilities, on_attach = on_attach }
-        for key, value in pairs(servers[server_name]) do
-          server_setup[key] = value
-        end
+      servers.ruby_lsp.cmd = {
+        cutils.script_path("docker-cmd"),
+        vim.env.DOCKER_CONTAINER,
+        "ruby-lsp",
+      }
+    end
 
-        require("lspconfig")[server_name].setup(server_setup)
-      end,
-    })
+    local disabled_servers = vim.split(vim.env.DISABLE_LSP_SERVERS or "", ",", { trimempty = true })
+    for _, server in pairs(disabled_servers) do
+      servers[server] = nil
+    end
+
+    for server, config in pairs(servers) do
+      local server_setup = vim.tbl_extend("keep", config, {
+        capabilities = capabilities,
+        on_attach = on_attach,
+      })
+
+      lspconfig[server].setup(server_setup)
+    end
   end,
 }

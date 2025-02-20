@@ -2,11 +2,11 @@ return {
   "vim-test/vim-test",
   config = function()
     local function docker_transform(cmd)
-      local docker_call = require("custom.utils").script_path("docker-container", {
-        DOCKER_CONTAINER = vim.env.DOCKER_CONTAINER,
-      })
-
-      return docker_call .. " " .. cmd
+      return table.concat({
+        require("custom.utils").script_path("docker-cmd"),
+        vim.env.DOCKER_CONTAINER,
+        cmd,
+      }, " ")
     end
 
     vim.g["test#custom_transformations"] = { docker = docker_transform }

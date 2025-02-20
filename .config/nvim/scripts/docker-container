@@ -1,5 +1,0 @@
-#!/bin/bash
-
-container="${DOCKER_CONTAINER:-app}"
-
-docker compose exec $container "$@"

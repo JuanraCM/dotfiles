@@ -8,10 +8,12 @@ return {
       ruby = { "rubocop" },
     }
 
-    lint.linters.rubocop.cmd = cutils.script_path("docker-rubocop", {
-      CONTAINER = vim.env.DOCKER_CONTAINER,
-    })
+    lint.linters.rubocop.cmd = cutils.script_path("docker-cmd")
     lint.linters.rubocop.args = {
+      vim.env.DOCKER_CONTAINER,
+      "bundle",
+      "exec",
+      "rubocop",
       "--format",
       "json",
       "--force-exclusion",
