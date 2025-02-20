@@ -39,3 +39,6 @@ setopt prompt_subst
 
 # Init zoxide
 eval "$(zoxide init zsh)"
+
+# Init mise
+eval "$(mise activate zsh)"
