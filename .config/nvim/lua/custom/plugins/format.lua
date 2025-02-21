@@ -11,6 +11,7 @@ return {
       },
       formatters_by_ft = {
         lua = { "stylua" },
+        ruby = { "rubyfmt" },
       },
     })
   end,
