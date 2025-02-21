@@ -1,3 +1,9 @@
+# Init zoxide
+eval "$(zoxide init zsh)"
+
+# Init mise
+eval "$(mise activate zsh)"
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -36,9 +42,3 @@ alias g='git'
 
 # Enable substitution in the prompt
 setopt prompt_subst
-
-# Init zoxide
-eval "$(zoxide init zsh)"
-
-# Init mise
-eval "$(mise activate zsh)"
