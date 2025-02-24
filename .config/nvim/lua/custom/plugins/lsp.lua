@@ -24,6 +24,7 @@ return {
       solargraph = {},
       rust_analyzer = {},
       ts_ls = {},
+      eslint = {},
     }
 
     local capabilities = require("blink.cmp").get_lsp_capabilities()
