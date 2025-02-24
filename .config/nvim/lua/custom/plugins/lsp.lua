@@ -23,6 +23,7 @@ return {
       ruby_lsp = {},
       solargraph = {},
       rust_analyzer = {},
+      ts_ls = {},
     }
 
     local capabilities = require("blink.cmp").get_lsp_capabilities()
