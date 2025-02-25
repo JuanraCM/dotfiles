@@ -10,6 +10,10 @@ return {
     snippets = { preset = "luasnip" },
     sources = {
       default = { "lsp", "path", "snippets", "buffer", "lazydev" },
+      per_filetype = {
+        sql = { "snippets", "dadbod", "buffer" },
+        mysql = { "snippets", "dadbod", "buffer" },
+      },
       providers = {
         lazydev = {
           name = "LazyDev",
@@ -18,6 +22,10 @@ return {
         },
         snippets = {
           score_offset = -2,
+        },
+        dadbod = {
+          name = "Dadbod",
+          module = "vim_dadbod_completion.blink",
         },
       },
     },
