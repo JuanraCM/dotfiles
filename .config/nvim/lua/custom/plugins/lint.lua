@@ -6,7 +6,6 @@ return {
 
     lint.linters_by_ft = {
       ruby = { "rubocop" },
-      javascript = { "eslint" },
     }
 
     lint.linters.rubocop.cmd = cutils.script_path("docker-cmd")
@@ -21,21 +20,7 @@ return {
       "--stdin",
       function()
         return vim.fn.expand("%")
-      end,
-    }
 
-    lint.linters.eslint.cmd = cutils.script_path("docker-cmd")
-    lint.linters.eslint.args = {
-      vim.env.DOCKER_CONTAINER,
-      "yarn",
-      "-s",
-      "eslint",
-      "--format",
-      "json",
-      "--stdin",
-      "--stdin-filename",
-      function()
-        return vim.fn.expand("%")
       end,
     }
 
