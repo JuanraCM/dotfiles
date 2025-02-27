@@ -29,7 +29,7 @@ vim.keymap.set("n", "<leader>tw", function()
 end, { desc = "Toggle line wrap" })
 
 -- Yank relative file path to system clipboard
-vim.keymap.set("n", "<leader>yf", ':let @+ = expand("%")<cr>', { desc = "Yank file path to clipboard" })
+vim.keymap.set("n", "<leader>yf", ':let @+ = expand("%:.")<cr>', { desc = "Yank file path to clipboard" })
 
 -- Substitute remaps
 vim.keymap.set("v", '<leader>s"', ":s/\"/'/g<cr>", { desc = "Replace double quotes with single quotes" })

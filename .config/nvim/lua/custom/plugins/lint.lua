@@ -19,8 +19,7 @@ return {
       "--force-exclusion",
       "--stdin",
       function()
-        return vim.fn.expand("%")
-
+        return vim.fn.expand("%:.")
       end,
     }
 
