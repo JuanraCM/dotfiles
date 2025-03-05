@@ -57,24 +57,12 @@ return {
       )
     end
 
-    local lspconfig = require("lspconfig")
-    local dockerized = lspconfig.util.root_pattern("Dockerfile", "docker-compose.yml")(vim.fn.getcwd())
-
-    if dockerized then
-      local cutils = require("custom.utils")
-
-      servers.ruby_lsp.cmd = {
-        cutils.script_path("docker-cmd"),
-        vim.env.DOCKER_CONTAINER,
-        "ruby-lsp",
-      }
-    end
-
     local disabled_servers = vim.split(vim.env.DISABLE_LSP_SERVERS or "", ",", { trimempty = true })
     for _, server in pairs(disabled_servers) do
       servers[server] = nil
     end
 
+    local lspconfig = require("lspconfig")
     for server, config in pairs(servers) do
       local server_setup = vim.tbl_extend("keep", config, {
         capabilities = capabilities,
