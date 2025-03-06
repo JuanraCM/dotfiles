@@ -1,6 +1,8 @@
-vim.api.nvim_buf_create_user_command(0, "RubocopFixAll", function()
+vim.api.nvim_buf_create_user_command(0, "RubocopFixAll", function(evt)
+  local formatter = evt.bang and "rubocop_unsafe" or "rubocop"
+
   require("conform").format({
-    formatters = { "rubocop" },
-    timeout_ms = 5000,
+    formatters = { formatter },
+    timeout_ms = 10000,
   })
-end, { desc = "Fix all rubocop offenses" })
+end, { bang = true, desc = "Fix all rubocop offenses" })
