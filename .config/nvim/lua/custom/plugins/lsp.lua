@@ -23,8 +23,9 @@ return {
       ruby_lsp = {},
       solargraph = {},
       rust_analyzer = {},
-      ts_ls = {},
       eslint = {},
+      ts_ls = {},
+      emmet_language_server = {},
     }
 
     local capabilities = require("blink.cmp").get_lsp_capabilities()
