@@ -23,6 +23,19 @@ local snippets = {
       { i(1), i(2) }
     )
   ),
+  s(
+    { trig = "csvf", desc = "Write into a CSV file" },
+    fmt(
+      [[
+        CSV.open('{}.csv', '{}') do |csv|
+          csv << {}
+
+          {}
+        end
+      ]],
+      { i(1), i(2), i(3), i(4) }
+    )
+  ),
 }
 
 return snippets
