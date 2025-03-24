@@ -2,6 +2,7 @@ return {
   "saghen/blink.cmp",
   version = "v0.*",
   opts = {
+    fuzzy = { implementation = "rust" },
     keymap = { preset = "default" },
     appearance = {
       use_nvim_cmp_as_default = true,
