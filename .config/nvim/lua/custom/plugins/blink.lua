@@ -1,6 +1,6 @@
 return {
   "saghen/blink.cmp",
-  version = "v0.*",
+  version = "1.*",
   opts = {
     fuzzy = { implementation = "rust" },
     keymap = { preset = "default" },
