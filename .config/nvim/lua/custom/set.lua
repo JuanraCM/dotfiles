@@ -68,3 +68,6 @@ vim.opt.fillchars = { fold = " " }
 -- Cursor style
 vim.api.nvim_set_hl(0, "CustomCursor", { bg = "#a8a6b1" })
 vim.o.guicursor = "n-v-c-sm:block-CustomCursor,i-ci-ve:ver25,r-cr-o:hor20"
+
+-- Diagnostic config
+vim.diagnostic.config({ virtual_text = true })
