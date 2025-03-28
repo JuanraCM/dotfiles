@@ -14,6 +14,7 @@ return {
       per_filetype = {
         sql = { "snippets", "dadbod", "buffer" },
         mysql = { "snippets", "dadbod", "buffer" },
+        codecompanion = { "codecompanion" },
       },
       providers = {
         lazydev = {
