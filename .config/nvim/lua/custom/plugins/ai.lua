@@ -1,6 +1,10 @@
 return {
   "olimorris/codecompanion.nvim",
   dependencies = {
+    {
+      "MeanderingProgrammer/render-markdown.nvim",
+      ft = { "markdown", "codecompanion" },
+    },
     "nvim-lua/plenary.nvim",
     "nvim-treesitter/nvim-treesitter",
   },
