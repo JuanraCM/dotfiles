@@ -17,6 +17,7 @@ return {
         codecompanion = { "codecompanion" },
       },
       providers = {
+        lsp = { async = true },
         lazydev = {
           name = "LazyDev",
           module = "lazydev.integrations.blink",
