@@ -1,0 +1,8 @@
+{
+  "Tirant BDD commit message": {
+    "prefix": "bdd",
+    "body": [
+      "[BDD-$BDD_TASK_ID] ${1:Commit message}"
+    ]
+  }
+}
