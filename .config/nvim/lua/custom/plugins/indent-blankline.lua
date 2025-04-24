@@ -3,5 +3,9 @@ return {
   main = "ibl",
   ---@module "ibl"
   ---@type ibl.config
-  opts = {},
+  opts = {
+    indent = {
+      tab_char = "→",
+    },
+  },
 }

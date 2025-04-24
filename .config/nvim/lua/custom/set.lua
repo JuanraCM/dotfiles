@@ -2,8 +2,7 @@
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
--- Set tab config to 2 spaces
-vim.opt.tabstop = 2
+-- Set default tab config to 2 spaces
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.bo.softtabstop = 2
