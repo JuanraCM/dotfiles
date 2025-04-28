@@ -70,3 +70,6 @@ vim.o.guicursor = "n-v-c-sm:block-CustomCursor,i-ci-ve:ver25,r-cr-o:hor20"
 
 -- Diagnostic config
 vim.diagnostic.config({ virtual_text = true })
+
+-- Color column
+vim.opt.colorcolumn = "100"
