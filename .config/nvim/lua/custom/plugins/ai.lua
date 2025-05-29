@@ -40,8 +40,9 @@ return {
     })
     require("custom.codecompanion-progress"):init()
 
-    vim.keymap.set("n", "<c-c>", ":CodeCompanionChat Toggle<cr>", { desc = "Toggle CodeCompanionChat" })
-    vim.keymap.set("v", "<c-c>", ":CodeCompanionChat Add<cr>", { desc = "Open CodeCompanionChat with selected code" })
+    vim.keymap.set("n", "<c-t>", ":CodeCompanionChat Toggle<cr>", { desc = "Toggle CodeCompanionChat" })
+    vim.keymap.set("v", "<c-t>", ":CodeCompanionChat Add<cr>", { desc = "Open CodeCompanionChat with selected code" })
+    vim.keymap.set("n", "<c-a>", ":CodeCompanionActions<cr>", { desc = "Open CodeCompanionActions" })
 
     vim.keymap.set("n", "tm", ":RenderMarkdown buf_toggle<cr>", { desc = "Toggle RenderMarkdown" })
   end,
