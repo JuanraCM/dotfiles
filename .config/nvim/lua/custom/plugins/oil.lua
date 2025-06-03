@@ -14,18 +14,19 @@ return {
 
     vim.keymap.set("n", "-", "<cmd>Oil<cr>", { desc = "Open parent directory" })
 
+    ---@module 'snacks'
     vim.api.nvim_create_autocmd("FileType", {
-      group = vim.api.nvim_create_augroup("OilTelescope", { clear = true }),
+      group = vim.api.nvim_create_augroup("OilPicker", { clear = true }),
       pattern = "oil",
       callback = function(evt)
         local cwd = vim.api.nvim_buf_get_name(0):gsub("^oil://", "")
 
         vim.keymap.set("n", "<leader>ff", function()
-          require("telescope.builtin").find_files({ cwd = cwd, hidden = true })
-        end, { buffer = evt.buf, desc = "Telescope find files" })
+          Snacks.picker.files({ cwd = cwd })
+        end, { buffer = evt.buf, desc = "Oil find files" })
         vim.keymap.set("n", "<leader>fa", function()
-          require("custom.telescope").live_multigrep({ cwd = cwd })
-        end, { buffer = evt.buf, desc = "Telescope live multigrep" })
+          Snacks.picker.grep({ cwd = cwd })
+        end, { buffer = evt.buf, desc = "Oil grep" })
       end,
     })
   end,

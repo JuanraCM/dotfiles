@@ -30,31 +30,26 @@ return {
 
     local capabilities = require("blink.cmp").get_lsp_capabilities()
     local on_attach = function(_, bufnr)
-      local builtin = require("telescope.builtin")
+      ---@module "snacks"
 
       vim.keymap.set(
         "n",
-        "<leader>gd",
-        builtin.lsp_definitions,
-        { buffer = bufnr, desc = "[LSP] Telescope go to definition" }
-      )
-      vim.keymap.set(
-        "n",
-        "<leader>fs",
-        builtin.lsp_document_symbols,
-        { buffer = bufnr, desc = "[LSP] Telescope search document symbols" }
-      )
-      vim.keymap.set(
-        "n",
-        "<leader>fS",
-        builtin.lsp_workspace_symbols,
-        { buffer = bufnr, desc = "[LSP] Telescope search workspace symbols" }
+        "<leader>fd",
+        Snacks.picker.lsp_definitions,
+        { buffer = bufnr, desc = "[LSP] Find definition" }
       )
       vim.keymap.set(
         "n",
         "<leader>fr",
-        builtin.lsp_references,
-        { buffer = bufnr, desc = "[LSP] Telescope search references word under cursor" }
+        Snacks.picker.lsp_references,
+        { buffer = bufnr, desc = "[LSP] Find references" }
+      )
+      vim.keymap.set("n", "<leader>fs", Snacks.picker.lsp_symbols, { buffer = bufnr, desc = "[LSP] Find symbols" })
+      vim.keymap.set(
+        "n",
+        "<leader>fS",
+        Snacks.picker.lsp_workspace_symbols,
+        { buffer = bufnr, desc = "[LSP] Find workspace symbols" }
       )
     end
 
