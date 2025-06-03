@@ -1,25 +1,15 @@
--- Deletes buffer
-vim.api.nvim_create_user_command("Q", function (evt)
-  vim.cmd({ cmd = "bdelete", bang = evt.bang })
-end, { bang = true })
-
--- Deletes all buffer
-vim.api.nvim_create_user_command("Qall", function (evt)
-  vim.cmd("%bdelete" .. (evt.bang and "!" or ""))
-end, { bang = true })
-
 -- Remaps for executing code when editing Lua files
 vim.api.nvim_create_autocmd("FileType", {
   group = vim.api.nvim_create_augroup("ExecLuaCodeKeymaps", { clear = true }),
   pattern = "lua",
-  callback = function (evt)
+  callback = function(evt)
     vim.keymap.set("n", "<leader>x", ":so<CR>", { buffer = evt.buf, desc = "Run code" })
     vim.keymap.set("v", "<leader>x", ":lua<CR>", { buffer = evt.buf, desc = "Run selected code" })
-  end
+  end,
 })
 
 -- Creates a temporary sandbox buffer for a given language
-vim.api.nvim_create_user_command("Sandbox", function (evt)
+vim.api.nvim_create_user_command("Sandbox", function(evt)
   local type = evt.fargs[1]
   local buf = vim.api.nvim_create_buf(true, false)
 
@@ -32,7 +22,7 @@ end, { nargs = 1 })
 -- Hightlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
   group = vim.api.nvim_create_augroup("HighlightOnYank", { clear = true }),
-  callback = function (_)
+  callback = function(_)
     vim.highlight.on_yank()
-  end
+  end,
 })
