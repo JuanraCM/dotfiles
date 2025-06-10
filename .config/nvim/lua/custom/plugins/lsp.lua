@@ -25,6 +25,8 @@ return {
       rust_analyzer = {},
       eslint = {},
       ts_ls = {},
+      pyright = {},
+      ruff = {},
       emmet_language_server = {},
     }
 
