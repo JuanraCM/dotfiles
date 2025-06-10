@@ -15,6 +15,12 @@ return {
   },
   event = "VeryLazy",
   config = function()
+    vim.keymap.set("i", "<c-j>", 'copilot#Accept("<CR>")', {
+      expr = true,
+      replace_keycodes = false,
+    })
+    vim.g.copilot_no_tab_map = true
+
     require("mcphub").setup()
     require("codecompanion").setup({
       extensions = {
