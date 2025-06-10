@@ -1,9 +1,7 @@
 return {
   {
     "tpope/vim-fugitive",
-    config = function()
-      vim.keymap.set("n", "<c-g>", ":vertical G<cr>", { desc = "Open git status in a vertical buffer" })
-    end,
+    event = "VeryLazy",
   },
   {
     "lewis6991/gitsigns.nvim",
@@ -28,10 +26,10 @@ return {
             gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
           end, { buffer = bufnr, desc = "Reset hunk" })
 
-          vim.keymap.set("n", "<leader>hn", function()
+          vim.keymap.set("n", "<c-n>", function()
             gitsigns.nav_hunk("next")
           end, { buffer = bufnr, desc = "Navigate to next hunk" })
-          vim.keymap.set("n", "<leader>hp", function()
+          vim.keymap.set("n", "<c-p>", function()
             gitsigns.nav_hunk("prev")
           end, { buffer = bufnr, desc = "Navigate to previous hunk" })
 
@@ -44,5 +42,6 @@ return {
         end,
       })
     end,
+    event = "BufReadPre",
   },
 }
