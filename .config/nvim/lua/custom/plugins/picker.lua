@@ -5,7 +5,33 @@ return {
   priority = 1000,
   lazy = false,
   opts = {
-    picker = {},
+    picker = {
+      actions = {
+        git_merge = function(picker, item)
+          if not (item and item.branch) then
+            Snacks.notify.warn("No branch or commit found", { title = "Snacks Picker" })
+          end
+
+          local branch = item.branch
+          Snacks.picker.util.cmd({ "git", "rev-parse", "--abbrev-ref", "HEAD" }, function(data)
+            if data[1]:match(branch) ~= nil then
+              Snacks.notify.error("Cannot delete the current branch.", { title = "Snacks Picker" })
+              return
+            end
+
+            Snacks.picker.select({ "Yes", "No" }, { prompt = ("Merge branch %q?"):format(branch) }, function(_, idx)
+              if idx == 1 then
+                Snacks.picker.util.cmd({ "git", "merge", branch }, function()
+                  Snacks.notify("Merged Branch `" .. branch .. "`", { title = "Snacks Picker" })
+                  vim.cmd.checktime()
+                  picker:close()
+                end, { cwd = picker:cwd() })
+              end
+            end)
+          end, { cwd = picker:cwd() })
+        end,
+      },
+    },
   },
   keys = {
     {
@@ -65,7 +91,15 @@ return {
     {
       "<leader>fb",
       function()
-        Snacks.picker.git_branches()
+        Snacks.picker.git_branches({
+          win = {
+            input = {
+              keys = {
+                ["<c-y>"] = { "git_merge", mode = { "n", "i" } },
+              },
+            },
+          },
+        })
       end,
       desc = "Git branches",
     },
