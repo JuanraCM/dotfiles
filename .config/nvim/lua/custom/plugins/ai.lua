@@ -15,6 +15,7 @@ return {
   },
   event = "VeryLazy",
   config = function()
+    vim.keymap.set("i", "<c-l>", "<Plug>(copilot-accept-word)")
     vim.keymap.set("i", "<c-j>", 'copilot#Accept("<CR>")', {
       expr = true,
       replace_keycodes = false,
