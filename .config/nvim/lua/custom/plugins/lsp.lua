@@ -1,8 +1,9 @@
+---@module "snacks"
+
 return {
   "neovim/nvim-lspconfig",
   dependencies = {
     "williamboman/mason.nvim",
-    { "j-hui/fidget.nvim", opts = {} },
     {
       "folke/lazydev.nvim",
       ft = "lua",
@@ -69,5 +70,26 @@ return {
 
       lspconfig[server].setup(server_setup)
     end
+
+    vim.api.nvim_create_autocmd("LspProgress", {
+      group = vim.api.nvim_create_augroup("SnacksLspProgress", { clear = true }),
+      ---@param ev {data: {client_id: integer, params: lsp.ProgressParams}}
+      callback = function(ev)
+        local client = vim.lsp.get_client_by_id(ev.data.client_id)
+
+        if not client then
+          return
+        end
+
+        local notif_id = "lsp_progress_" .. client.id
+        Snacks.notifier.notify(vim.lsp.status(), "info", {
+          id = notif_id,
+          title = client.name,
+          opts = function(notif)
+            notif.icon = ev.data.params.value.kind == "end" and " " or Snacks.util.spinner()
+          end,
+        })
+      end,
+    })
   end,
 }

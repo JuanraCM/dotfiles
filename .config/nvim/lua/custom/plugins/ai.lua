@@ -1,3 +1,5 @@
+---@module "snacks"
+
 return {
   "olimorris/codecompanion.nvim",
   dependencies = {
@@ -46,7 +48,21 @@ return {
         end,
       },
     })
-    require("custom.codecompanion-progress"):init()
+
+    vim.api.nvim_create_autocmd({ "User" }, {
+      pattern = "CodeCompanionRequestStarted",
+      group = vim.api.nvim_create_augroup("SnacksCodeCompanionProgress", { clear = true }),
+      callback = function(request)
+        local notif_title = "CodeCompanion (" .. request.data.strategy .. ")"
+        local notif_msg = "**" .. request.data.adapter.model .. "** Requesting assistance..."
+        Snacks.notifier.notify(notif_msg, "info", {
+          opts = function(notif)
+            notif.title = notif_title
+            notif.icon = Snacks.util.spinner()
+          end,
+        })
+      end,
+    })
   end,
   keys = {
     { "<c-t>", ":CodeCompanionChat Toggle<cr>", desc = "Toggle CodeCompanionChat" },
