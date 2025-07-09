@@ -32,6 +32,7 @@ return {
         end,
       },
     },
+    explorer = {},
   },
   keys = {
     {
@@ -51,6 +52,13 @@ return {
         Snacks.picker.files({ hidden = true })
       end,
       desc = "Find files",
+    },
+    {
+      "<leader>fF",
+      function()
+        Snacks.explorer.open({ layout = "default" })
+      end,
+      desc = "Find files (explorer)",
     },
     {
       "<leader>fa",
