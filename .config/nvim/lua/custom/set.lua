@@ -73,3 +73,10 @@ vim.diagnostic.config({ virtual_text = true })
 
 -- Color column
 vim.opt.colorcolumn = "100"
+
+-- List characters
+vim.opt.listchars = {
+  tab = "-",
+  trail = "⋅",
+  lead = "⋅",
+}
