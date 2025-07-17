@@ -7,6 +7,7 @@ return {
     "lewis6991/gitsigns.nvim",
     config = function()
       local gitsigns = require("gitsigns")
+      local utils = require("custom.utils")
 
       gitsigns.setup({
         on_attach = function(bufnr)
@@ -33,12 +34,9 @@ return {
             gitsigns.nav_hunk("prev")
           end, { buffer = bufnr, desc = "Navigate to previous hunk" })
 
-          vim.keymap.set(
-            "n",
-            "<leader>tb",
-            gitsigns.toggle_current_line_blame,
-            { buffer = bufnr, desc = "Toggle current line blame" }
-          )
+          vim.keymap.set("n", "<leader>tb", function()
+            utils.notify_toggle("Current line blame", gitsigns.toggle_current_line_blame)
+          end, { buffer = bufnr, desc = "Toggle current line blame" })
         end,
       })
     end,

@@ -28,6 +28,10 @@ return {
     vim.keymap.set("n", "<leader>tl", function()
       lint_enabled = not lint_enabled
 
+      cutils.notify_toggle("Linters", function()
+        return lint_enabled
+      end)
+
       if not lint_enabled then
         vim.diagnostic.reset(nil, 0)
       end

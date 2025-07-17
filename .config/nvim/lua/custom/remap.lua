@@ -1,3 +1,5 @@
+local utils = require("custom.utils")
+
 vim.g.mapleader = " "
 -- Leader inside a buffer
 vim.g.maplocalleader = " "
@@ -16,13 +18,27 @@ vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "Paste without replacing cur
 
 -- Toggle relative numbers
 vim.keymap.set("n", "<leader>tr", function()
-  vim.wo.relativenumber = not vim.wo.relativenumber
+  utils.notify_toggle("Relative numbers", function()
+    vim.wo.relativenumber = not vim.wo.relativenumber
+    return vim.wo.relativenumber
+  end)
 end, { desc = "Toggle relative numbers" })
 
 -- Toggle line wrap
 vim.keymap.set("n", "<leader>tw", function()
-  vim.wo.wrap = not vim.wo.wrap
+  utils.notify_toggle("Line wrap", function()
+    vim.wo.wrap = not vim.wo.wrap
+    return vim.wo.wrap
+  end)
 end, { desc = "Toggle line wrap" })
+
+-- Toggle list characters
+vim.keymap.set("n", "<leader>tc", function()
+  utils.notify_toggle("List characters", function()
+    vim.o.list = not vim.o.list
+    return vim.o.list
+  end)
+end, { desc = "Toggle list characters" })
 
 -- Yank relative file path to system clipboard
 vim.keymap.set("n", "<leader>yf", ':let @+ = expand("%:.")<cr>', { desc = "Yank file path to clipboard" })
