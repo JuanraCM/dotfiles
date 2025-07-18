@@ -26,13 +26,48 @@ return {
 
     require("mcphub").setup()
     require("codecompanion").setup({
+      prompt_library = {
+        ["Gitlab MR Review"] = {
+          strategy = "chat",
+          description = "Review a Gitlab Merge Request",
+          opts = {
+            short_name = "glreview",
+            auto_submit = true,
+          },
+          prompts = {
+            {
+              role = "system",
+              content = "You are an expert developer trying to analyze a Gitlab Merge Request searching for possible issues, improvements, and suggestions.",
+            },
+            {
+              role = "user",
+              content = function(_)
+                local gitlab_mr_url
+
+                vim.ui.input({
+                  prompt = "Enter the Gitlab Merge Request URL: ",
+                  default = "",
+                }, function(input)
+                  gitlab_mr_url = input
+                end)
+
+                return "<user_prompt>@{gitlab} Review the following Gitlab Merge Request:\n\n"
+                  .. gitlab_mr_url
+                  .. "</user_prompt>"
+              end,
+            },
+          },
+        },
+      },
       extensions = {
         mcphub = {
           callback = "mcphub.extensions.codecompanion",
           opts = {
-            show_result_in_chat = true,
             make_vars = true,
+            make_tools = true,
             make_slash_commands = true,
+            show_result_in_chat = true,
+            show_server_tools_in_chat = true,
           },
         },
       },
