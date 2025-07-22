@@ -31,6 +31,9 @@ zinit light romkatv/powerlevel10k
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
+
 # Load custom profile if exists
 [[ -s $HOME/.custom-profile ]] && source $HOME/.custom-profile
 
