@@ -29,6 +29,7 @@ return {
       pyright = {},
       ruff = {},
       emmet_language_server = {},
+      clangd = {},
     }
 
     local capabilities = require("blink.cmp").get_lsp_capabilities()
@@ -77,7 +78,7 @@ return {
       callback = function(ev)
         local client = vim.lsp.get_client_by_id(ev.data.client_id)
 
-        if not client then
+        if not client or client.name == "solargraph" then
           return
         end
 
