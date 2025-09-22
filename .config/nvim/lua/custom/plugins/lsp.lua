@@ -62,14 +62,14 @@ return {
       servers[server] = nil
     end
 
-    local lspconfig = require("lspconfig")
     for server, config in pairs(servers) do
       local server_setup = vim.tbl_extend("keep", config, {
         capabilities = capabilities,
         on_attach = on_attach,
       })
 
-      lspconfig[server].setup(server_setup)
+      vim.lsp.config(server, server_setup)
+      vim.lsp.enable(server)
     end
 
     vim.api.nvim_create_autocmd("LspProgress", {
