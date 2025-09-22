@@ -102,7 +102,13 @@ return {
     })
   end,
   keys = {
-    { "<c-t>", ":CodeCompanionChat Toggle<cr>", desc = "Toggle CodeCompanionChat" },
+    {
+      "<c-t>",
+      function()
+        require("codecompanion").toggle()
+      end,
+      desc = "Toggle CodeCompanionChat",
+    },
     { "<c-t>", ":CodeCompanionChat Add<cr>", mode = "v", desc = "Open CodeCompanionChat with selected code" },
     { "tm", ":RenderMarkdown buf_toggle<cr>", desc = "Toggle RenderMarkdown" },
   },
