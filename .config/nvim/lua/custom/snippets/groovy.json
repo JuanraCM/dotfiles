@@ -1,0 +1,10 @@
+{
+  "Debug with print statements": {
+    "prefix": "dbg",
+    "body": [
+      "println '##### DEBUG #####'",
+      "println $1",
+      "println '##### DEBUG #####'"
+    ]
+  }
+}
