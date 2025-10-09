@@ -38,9 +38,9 @@ return {
 
       vim.keymap.set(
         "n",
-        "<leader>fd",
+        "<leader>gd",
         Snacks.picker.lsp_definitions,
-        { buffer = bufnr, desc = "[LSP] Find definition" }
+        { buffer = bufnr, desc = "[LSP] Go to definition" }
       )
       vim.keymap.set(
         "n",
