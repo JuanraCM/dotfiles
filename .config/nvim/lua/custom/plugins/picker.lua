@@ -155,6 +155,13 @@ return {
       desc = "Diagnostics",
     },
     {
+      "<leader>fD",
+      function()
+        Snacks.picker.diagnostics_buffer()
+      end,
+      desc = "Diagnostics current file",
+    },
+    {
       "<leader>fn",
       function()
         Snacks.picker.files({ cwd = vim.fn.stdpath("config") })
