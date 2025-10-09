@@ -30,6 +30,15 @@ return {
             end)
           end, { cwd = picker:cwd() })
         end,
+        git_view_file = function(picker, item)
+          if not (item and item.commit) then
+            Snacks.notify.warn("No branch or commit found", { title = "Snacks Picker" })
+          end
+
+          picker:close()
+
+          vim.cmd.Gvsplit(item.commit .. ":%")
+        end,
       },
     },
     explorer = {},
@@ -38,11 +47,7 @@ return {
     {
       "<leader><leader>",
       function()
-        Snacks.picker.buffers({
-          on_show = function()
-            vim.cmd.stopinsert()
-          end,
-        })
+        Snacks.picker.buffers()
       end,
       desc = "Buffers",
     },
@@ -85,14 +90,30 @@ return {
     {
       "<leader>fc",
       function()
-        Snacks.picker.git_log()
+        Snacks.picker.git_log({
+          win = {
+            input = {
+              keys = {
+                ["<c-v>"] = { "git_view_file", mode = { "n", "i" } },
+              },
+            },
+          },
+        })
       end,
       desc = "Git commits",
     },
     {
       "<leader>fC",
       function()
-        Snacks.picker.git_log_file()
+        Snacks.picker.git_log_file({
+          win = {
+            input = {
+              keys = {
+                ["<c-v>"] = { "git_view_file", mode = { "n", "i" } },
+              },
+            },
+          },
+        })
       end,
       desc = "Git commits current file",
     },
@@ -104,6 +125,7 @@ return {
             input = {
               keys = {
                 ["<c-y>"] = { "git_merge", mode = { "n", "i" } },
+                ["<c-v>"] = { "git_view_file", mode = { "n", "i" } },
               },
             },
           },
