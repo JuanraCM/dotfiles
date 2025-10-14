@@ -39,6 +39,15 @@ return {
 
           vim.cmd.Gvsplit(item.commit .. ":%")
         end,
+        delete_files = function(picker)
+          for _, item in ipairs(picker:selected({ fallback = true })) do
+            if item.file then
+              vim.fn.delete(item._path)
+            end
+          end
+
+          picker:find()
+        end,
       },
     },
     explorer = {},
