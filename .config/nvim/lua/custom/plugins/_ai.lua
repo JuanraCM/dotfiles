@@ -1,6 +1,7 @@
 ---@module "snacks"
 
 return {
+  enabled = false,
   "olimorris/codecompanion.nvim",
   dependencies = {
     "github/copilot.vim",
