@@ -34,8 +34,8 @@ zinit light romkatv/powerlevel10k
 # Set up fzf key bindings and fuzzy completion
 source <(fzf --zsh)
 
-# Load custom profile if exists
-[[ -s $HOME/.custom-profile ]] && source $HOME/.custom-profile
+# Load local zshrc if exists
+[[ -s $HOME/.zshrc.local ]] && source $HOME/.zshrc.local
 
 # GPG TTY config for passprhase prompt
 export GPG_TTY=$TTY
