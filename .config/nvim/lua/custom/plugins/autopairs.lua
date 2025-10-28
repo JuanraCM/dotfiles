@@ -1,4 +1,5 @@
 return {
+  enabled = false,
   "echasnovski/mini.pairs",
   version = "*",
   config = function()
