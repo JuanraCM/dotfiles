@@ -8,17 +8,6 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- Creates a temporary sandbox buffer for a given language
-vim.api.nvim_create_user_command("Sandbox", function(evt)
-  local type = evt.fargs[1]
-  local buf = vim.api.nvim_create_buf(true, false)
-
-  vim.api.nvim_buf_set_name(buf, "Sandbox" .. " (" .. type .. ")")
-  vim.api.nvim_set_option_value("filetype", type, { buf = buf })
-  vim.api.nvim_set_option_value("buftype", "nofile", { buf = buf })
-  vim.api.nvim_set_current_buf(buf)
-end, { nargs = 1 })
-
 -- Hightlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
   group = vim.api.nvim_create_augroup("HighlightOnYank", { clear = true }),
