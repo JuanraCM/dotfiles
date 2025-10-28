@@ -1,12 +1,6 @@
 return {
   "folke/sidekick.nvim",
-  opts = {
-    cli = {
-      prompts = {
-        task = "Could you help me with {file}?",
-      },
-    },
-  },
+  opts = {},
   keys = {
     {
       "<tab>",
@@ -29,18 +23,18 @@ return {
     {
       "<leader>as",
       function()
-        require("sidekick.cli").select({ filter = { installed = true } })
-      end,
-      mode = { "n", "v" },
-      desc = "Sidekick Select CLI",
-    },
-    {
-      "<leader>as",
-      function()
         require("sidekick.cli").send({ selection = true })
       end,
       mode = { "v" },
       desc = "Sidekick Send Visual Selection",
+    },
+    {
+      "<leader>af",
+      function()
+        require("sidekick.cli").send({ msg = "{file}" })
+      end,
+      mode = { "n" },
+      desc = "Sidekick Send File",
     },
     {
       "<leader>ap",

@@ -52,4 +52,4 @@ vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = tr
 vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- Remap for exiting terminal mode
-vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Exit terminal mode" })
+vim.keymap.set("t", "<c-q>", "<c-\\><c-n>", { desc = "Exit terminal mode" })
