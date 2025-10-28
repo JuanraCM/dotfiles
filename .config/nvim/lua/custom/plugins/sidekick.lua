@@ -1,6 +1,17 @@
 return {
   "folke/sidekick.nvim",
-  opts = {},
+  opts = {
+    cli = {
+      context = {
+        clipboard = function(_)
+          return vim.fn.getreg("+")
+        end,
+      },
+      prompts = {
+        mr_review = "Would you analyze the following Merge Request and search for possible issues, improvements, and suggestions?\n{clipboard}",
+      },
+    },
+  },
   keys = {
     {
       "<tab>",
