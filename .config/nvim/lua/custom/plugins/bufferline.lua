@@ -14,6 +14,7 @@ return {
         close_command = function(n)
           Snacks.bufdelete(n)
         end,
+        show_buffer_close_icons = false,
       },
     })
   end,
