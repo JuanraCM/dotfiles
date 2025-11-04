@@ -133,6 +133,12 @@ for i = 1, 9 do
     mods = "LEADER",
     action = wezterm.action.ActivateTab(i - 1),
   })
+
+  table.insert(config.keys, {
+    key = tostring(i),
+    mods = "CTRL",
+    action = wezterm.action.MoveTab(i - 1),
+  })
 end
 
 -- Neovim pane navigation setup
