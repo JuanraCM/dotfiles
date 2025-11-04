@@ -26,6 +26,11 @@ config.use_fancy_tab_bar = false
 config.leader = { key = "Space", mods = "CTRL", timeout_milliseconds = 1000 }
 config.keys = {
   {
+    key = "d",
+    mods = "LEADER",
+    action = wezterm.action.ShowDebugOverlay,
+  },
+  {
     key = "c",
     mods = "LEADER",
     action = wezterm.action.SpawnTab("CurrentPaneDomain"),
