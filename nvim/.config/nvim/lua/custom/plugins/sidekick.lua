@@ -72,11 +72,11 @@ return {
       mode = { "n", "v" },
     },
     {
-      "<leader>ag",
+      "<leader>ao",
       function()
-        require("sidekick.cli").toggle({ name = "gemini", focus = true })
+        require("sidekick.cli").toggle({ name = "opencode", focus = true })
       end,
-      desc = "Sidekick Gemini Toggle",
+      desc = "Sidekick Opencode Toggle",
       mode = { "n", "v" },
     },
     {
