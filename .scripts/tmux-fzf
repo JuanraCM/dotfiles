@@ -1,6 +1,0 @@
-#!/bin/bash
-
-lineno=$(tmux capture-pane -p -S - -E - | tac | nl -ba -v 0 | fzf --tmux | awk '{print $1}')
-
-tmux copy-mode
-tmux send-keys -X goto-line "$lineno"
