@@ -1,2 +1,1 @@
-.local/share/fonts/.uuid
-.config/wezterm/workspaces/*.lua
+wezterm/.config/wezterm/workspaces/*.lua

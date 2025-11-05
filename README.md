@@ -19,7 +19,7 @@ sudo apt install zsh git stow tmux wl-clipboard ninja-build gettext cmake unzip 
 2. Set up all the symlinks using stow:
 
 ```bash
-stow .
+stow */
 ```
 
 3. Set ZSH as the default shell and logout:
@@ -39,12 +39,6 @@ make CMAKE_BUILD_TYPE=RelWithDebInfo
 sudo make install
 ```
 
-5. Install MesloLGS NF font (remember to update your terminal font after this):
-
-```bash
-fc-cache -f -v
-```
-
 ## Installation guide (MacOS)
 
 1. Clone the repository and cd into it:
@@ -62,7 +56,7 @@ brew install stow tmux ninja gettext cmake curl ripgrep
 2. Set up all the symlinks using stow:
 
 ```bash
-stow .
+stow */
 ```
 
 3. Logout:
@@ -80,8 +74,3 @@ git checkout stable
 make CMAKE_BUILD_TYPE=RelWithDebInfo
 sudo make install
 ```
-
-5. Install MesloLGS NF font (remember to update your terminal font after this):
-
-```bash
-cp .local/share/fonts/* ~/Library/Fonts
