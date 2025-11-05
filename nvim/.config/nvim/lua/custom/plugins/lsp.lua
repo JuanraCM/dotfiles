@@ -37,6 +37,7 @@ return {
       ruff = {},
       emmet_language_server = {},
       clangd = {},
+      jsonls = {},
     }
 
     local capabilities = require("blink.cmp").get_lsp_capabilities()
