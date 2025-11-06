@@ -1,0 +1,17 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "theme": "catppuccin",
+  "model": "github-copilot/claude-sonnet-4.5",
+  "autoupdate": true,
+  "mcp": {
+    "hub": {
+      "enabled": true,
+      "type": "remote",
+      "url": "http://localhost:37373/mcp",
+      "headers": {}
+    }
+  },
+  "keybinds": {
+    "command_list": "leader+p"
+  }
+}

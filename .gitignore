@@ -1,1 +1,5 @@
+# WezTerm workspaces
 wezterm/.config/wezterm/workspaces/*.lua
+
+# Opencode restricted agents
+opencode/.config/opencode/agent/tirant.md
