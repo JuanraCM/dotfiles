@@ -8,5 +8,5 @@ vim.api.nvim_buf_create_user_command(0, "RubocopFixAll", function(evt)
 end, { bang = true, desc = "Fix all rubocop offenses" })
 
 vim.keymap.set("v", "<leader>m", function()
-  require("custom.ruby-monkeypatch").monkeypatch()
+  require("custom.ruby-mp").monkeypatch()
 end, { buffer = true, desc = "Monkeypatch ruby class" })
