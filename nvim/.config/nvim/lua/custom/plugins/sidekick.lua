@@ -82,7 +82,13 @@ return {
     {
       "<leader>tn",
       function()
-        require("custom.utils").notify_toggle("Sidekick NES", require("sidekick.nes").toggle)
+        local nes_toggle_wrapper = function()
+          require("sidekick.nes").toggle()
+
+          return require("sidekick.nes").enabled
+        end
+
+        require("custom.utils").notify_toggle("Sidekick NES", nes_toggle_wrapper)
       end,
       desc = "Toggle Sidekick NES",
       mode = { "n" },
