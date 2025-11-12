@@ -46,5 +46,8 @@ alias g='git'
 # Lazydocker alias
 alias ld='lazydocker'
 
+# Set default editor
+export EDITOR='nvim'
+
 # Enable substitution in the prompt
 setopt prompt_subst
