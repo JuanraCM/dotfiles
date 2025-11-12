@@ -28,6 +28,8 @@ config.status_update_interval = 1000
 
 ---@type Palette
 local scheme = wezterm.color.get_builtin_schemes()[config.color_scheme]
+local active_bg = scheme.tab_bar.active_tab.bg_color
+local active_bg_alt = wezterm.color.parse(tostring(active_bg)):darken(0.2)
 wezterm.on("update-status", function(window)
   local ram = tab_bar_utils.ram_usage()
   local ram_icon = wezterm.nerdfonts.cod_server
@@ -45,6 +47,12 @@ wezterm.on("update-status", function(window)
     { Background = { Color = scheme.tab_bar.active_tab.bg_color } },
     { Foreground = { Color = scheme.tab_bar.active_tab.fg_color } },
     { Text = " " .. ctime_icon .. "  " .. ctime .. " " },
+  }))
+
+  window:set_left_status(wezterm.format({
+    { Background = { Color = tostring(active_bg_alt) } },
+    { Foreground = { Color = scheme.tab_bar.active_tab.fg_color } },
+    { Text = " " .. wezterm.nerdfonts.cod_gear .. "  " .. window:active_workspace() .. " " },
   }))
 end)
 
