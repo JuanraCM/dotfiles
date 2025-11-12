@@ -43,5 +43,8 @@ export GPG_TTY=$TTY
 # Git alias
 alias g='git'
 
+# Lazydocker alias
+alias ld='lazydocker'
+
 # Enable substitution in the prompt
 setopt prompt_subst
