@@ -12,6 +12,10 @@
     }
   },
   "keybinds": {
-    "command_list": "leader+p"
+    "command_list": "leader+p",
+    "messages_half_page_up": "ctrl+u",
+    "messages_half_page_down": "ctrl+d",
+    "messages_page_up": "ctrl+shift+u",
+    "messages_page_down": "ctrl+shift+d"
   }
 }
