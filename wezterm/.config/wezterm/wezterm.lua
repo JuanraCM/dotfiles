@@ -165,6 +165,16 @@ config.keys = {
     mods = "CTRL",
     action = wezterm.action.AdjustPaneSize({ "Right", 5 }),
   },
+  {
+    key = "j",
+    mods = "LEADER",
+    action = wezterm.action.RotatePanes("Clockwise"),
+  },
+  {
+    key = "k",
+    mods = "LEADER",
+    action = wezterm.action.RotatePanes("CounterClockwise"),
+  },
 }
 for i = 1, 9 do
   table.insert(config.keys, {
