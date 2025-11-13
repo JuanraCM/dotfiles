@@ -4,8 +4,7 @@ local config = wezterm.config_builder() ---@type Config
 -- Custom modules
 local tab_bar_utils = require("tab-bar-utils")
 local neovim_nav = require("neovim-nav")
-local workspace_mng = require("workspace-manager")
-workspace_mng.load_workspaces()
+local wsinit = wezterm.plugin.require("https://github.com/JuanraCM/wsinit.wezterm")
 
 -- General settings
 config.max_fps = 165
@@ -92,19 +91,6 @@ config.keys = {
       action = wezterm.action_callback(function(window, _, line)
         if line then
           window:active_tab():set_title(line)
-        end
-      end),
-    }),
-  },
-  {
-    key = "w",
-    mods = "LEADER",
-    action = wezterm.action.InputSelector({
-      title = "Select workspace",
-      choices = workspace_mng.list(),
-      action = wezterm.action_callback(function(window, _, wid)
-        if wid then
-          workspace_mng.setup_workspace(wid, window)
         end
       end),
     }),
@@ -197,6 +183,11 @@ neovim_nav.setup({
   MovePaneDown = { direction = "Down", key = "j" },
   MovePaneUp = { direction = "Up", key = "k" },
 })
+
+wsinit.setup({
+  workspaces_dir = wezterm.config_dir .. "/workspaces",
+})
+wsinit.apply_to_config(config)
 
 -- MacOS stuff
 config.send_composed_key_when_left_alt_is_pressed = true
