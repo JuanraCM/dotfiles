@@ -185,7 +185,7 @@ neovim_nav.setup({
 })
 
 wsinit.setup({
-  workspaces_dir = wezterm.config_dir .. "/workspaces",
+  workspaces_dir = wezterm.home_dir .. "/.workspaces",
 })
 wsinit.apply_to_config(config)
 
