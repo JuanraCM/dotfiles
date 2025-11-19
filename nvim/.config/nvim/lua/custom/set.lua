@@ -80,3 +80,8 @@ vim.opt.listchars = {
   trail = "⋅",
   lead = "⋅",
 }
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "json",
+  command = "setlocal formatprg=jq",
+})
