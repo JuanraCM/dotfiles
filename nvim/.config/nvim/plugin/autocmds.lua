@@ -15,3 +15,39 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     vim.highlight.on_yank()
   end,
 })
+
+-- Markdown keymaps for pasting buffer/file paths
+vim.api.nvim_create_autocmd("FileType", {
+  group = vim.api.nvim_create_augroup("MarkdownPathPasteKeymaps", { clear = true }),
+  pattern = "markdown",
+  callback = function(evt)
+    local paste_file = function(picker)
+      local selected = picker:selected({ fallback = true })
+      local selected_count = #selected
+
+      local fmt = selected_count > 1 and "- `%s`\n" or "`%s`"
+
+      picker:close()
+
+      for _, item in ipairs(selected) do
+        vim.api.nvim_paste(fmt:format(item.file), true, -1)
+      end
+    end
+
+    vim.keymap.set({ "n", "i" }, "<c-b>", function()
+      Snacks.picker.buffers({
+        confirm = function(picker)
+          paste_file(picker)
+        end,
+      })
+    end, { buffer = evt.buf, desc = "Paste buffer/s path" })
+
+    vim.keymap.set({ "n", "i" }, "<c-f>", function()
+      Snacks.picker.files({
+        confirm = function(picker)
+          paste_file(picker)
+        end,
+      })
+    end, { buffer = evt.buf, desc = "Paste file/s path" })
+  end,
+})
