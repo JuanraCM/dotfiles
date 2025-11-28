@@ -68,13 +68,6 @@ return {
       desc = "Find files",
     },
     {
-      "<leader>fF",
-      function()
-        Snacks.explorer.open({ layout = "default" })
-      end,
-      desc = "Find files (explorer)",
-    },
-    {
       "<leader>fa",
       function()
         Snacks.picker.grep({ hidden = true })
@@ -183,6 +176,13 @@ return {
         Snacks.picker.files({ cwd = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy") })
       end,
       desc = "Find nvim plugins",
+    },
+    {
+      "<c-e>",
+      function()
+        Snacks.explorer()
+      end,
+      desc = "Toggle Explorer",
     },
   },
 }
