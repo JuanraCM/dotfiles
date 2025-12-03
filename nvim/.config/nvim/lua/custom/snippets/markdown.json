@@ -1,0 +1,40 @@
+{
+  "ai-task": {
+    "prefix": "ai-task",
+    "body": [
+      "",
+      "## Context",
+      "",
+      "- $1",
+      "",
+      "## Task",
+      "",
+      "- $2"
+    ]
+  },
+  "ai-task-phases": {
+    "prefix": "ai-task-phases",
+    "body": [
+      "",
+      "## Context",
+      "",
+      "- $1",
+      "",
+      "## Task",
+      "",
+      "- $2",
+      "",
+      "### Phase 1",
+      "",
+      "- $3",
+      "",
+      "- [ ] Completed",
+      "",
+      "### Phase 2",
+      "",
+      "- $4",
+      "",
+      "- [ ] Completed"
+    ]
+  }
+}

@@ -1,7 +1,6 @@
 ---@module "snacks"
 
 local TASKS_DIR = vim.fs.joinpath(vim.fn.stdpath("data"), "tasks")
-local TASK_TEMPLATE = { "", "## Context", "", "- TODO", "", "## Task", "", "- TODO", "" }
 
 local function ensure_tasks_dir()
   if vim.fn.isdirectory(TASKS_DIR) == 0 then
@@ -43,7 +42,6 @@ local function new_task()
       return
     end
 
-    vim.fn.writefile(TASK_TEMPLATE, task_file)
     vim.cmd("edit " .. task_file)
   end)
 end
