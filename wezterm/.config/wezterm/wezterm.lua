@@ -102,12 +102,12 @@ config.keys = {
   },
   {
     key = "%",
-    mods = "LEADER",
+    mods = "LEADER|SHIFT",
     action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
   },
   {
     key = '"',
-    mods = "LEADER",
+    mods = "LEADER|SHIFT",
     action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
   },
   {
