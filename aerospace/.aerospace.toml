@@ -2,7 +2,7 @@
 start-at-login = true 
 
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
-after-startup-command = ['layout v_accordion']
+after-startup-command = ['layout h_accordion']
 
 # Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide#normalization
 enable-normalization-flatten-containers = true
@@ -68,7 +68,7 @@ automatically-unhide-macos-hidden-apps = false
     # '''
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#layout
-    cmd-comma = 'layout h_tiles v_accordion'
+    cmd-comma = 'layout h_tiles h_accordion'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#focus
     cmd-h = 'focus left'
