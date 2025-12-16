@@ -2,6 +2,10 @@ return {
   "folke/sidekick.nvim",
   opts = {
     cli = {
+      win = {
+        bo = { buflisted = true },
+        split = { width = 0 },
+      },
       context = {
         clipboard = function(_)
           return vim.fn.getreg("+")
