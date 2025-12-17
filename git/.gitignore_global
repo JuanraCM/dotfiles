@@ -1,2 +1,5 @@
 .nvim-env.json
 mise.toml
+.opencode/
+openspec/
+AGENTS.md
