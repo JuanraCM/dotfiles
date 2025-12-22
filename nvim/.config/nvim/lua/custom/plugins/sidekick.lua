@@ -3,8 +3,10 @@ return {
   opts = {
     cli = {
       win = {
-        bo = { buflisted = true },
         split = { width = 0 },
+        keys = {
+          hide_ctrl_a = { "<c-a>", "hide", mode = "nt", desc = "hide the terminal window" },
+        },
       },
       context = {
         clipboard = function(_)
@@ -26,14 +28,6 @@ return {
       end,
       expr = true,
       desc = "Goto/Apply Next Edit Suggestion",
-    },
-    {
-      "<leader>aa",
-      function()
-        require("sidekick.cli").toggle()
-      end,
-      mode = { "n", "v" },
-      desc = "Sidekick Toggle CLI",
     },
     {
       "<leader>as",
@@ -60,28 +54,12 @@ return {
       desc = "Sidekick Select Prompt",
     },
     {
-      "<c-.>",
+      "<c-a>",
       function()
-        require("sidekick.cli").focus()
+        require("sidekick.cli").focus("opencode")
       end,
       mode = { "n", "x", "i", "t" },
       desc = "Sidekick Switch Focus",
-    },
-    {
-      "<leader>ac",
-      function()
-        require("sidekick.cli").toggle({ name = "copilot", focus = true })
-      end,
-      desc = "Sidekick Copilot Toggle",
-      mode = { "n", "v" },
-    },
-    {
-      "<leader>ao",
-      function()
-        require("sidekick.cli").toggle({ name = "opencode", focus = true })
-      end,
-      desc = "Sidekick Opencode Toggle",
-      mode = { "n", "v" },
     },
     {
       "<leader>tn",
