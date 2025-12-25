@@ -39,6 +39,7 @@ return {
       clangd = {},
       jsonls = {},
       bashls = {},
+      nil_ls = {},
     }
 
     local capabilities = require("blink.cmp").get_lsp_capabilities()
