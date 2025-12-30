@@ -1,12 +1,10 @@
 return {
   "folke/sidekick.nvim",
+  event = "VeryLazy",
   opts = {
     cli = {
       win = {
         split = { width = 0 },
-        keys = {
-          hide_ctrl_a = { "<c-a>", "hide", mode = "nt", desc = "hide the terminal window" },
-        },
       },
       context = {
         clipboard = function(_)
@@ -30,36 +28,20 @@ return {
       desc = "Goto/Apply Next Edit Suggestion",
     },
     {
-      "<leader>as",
-      function()
-        require("sidekick.cli").send({ selection = true })
-      end,
-      mode = { "v" },
-      desc = "Sidekick Send Visual Selection",
-    },
-    {
-      "<leader>af",
-      function()
-        require("sidekick.cli").send({ msg = "{file}" })
-      end,
-      mode = { "n" },
-      desc = "Sidekick Send File",
-    },
-    {
-      "<leader>ap",
-      function()
-        require("sidekick.cli").prompt()
-      end,
-      mode = { "n", "v" },
-      desc = "Sidekick Select Prompt",
-    },
-    {
-      "<c-a>",
+      "<c-.>",
       function()
         require("sidekick.cli").focus("opencode")
       end,
       mode = { "n", "x", "i", "t" },
       desc = "Sidekick Switch Focus",
+    },
+    {
+      "<c-.>",
+      function()
+        require("sidekick.cli").send({ name = "opencode", selection = true })
+      end,
+      mode = { "v" },
+      desc = "Sidekick Send Visual Selection",
     },
     {
       "<leader>tn",
