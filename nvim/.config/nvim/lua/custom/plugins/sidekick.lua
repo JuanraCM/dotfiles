@@ -28,7 +28,7 @@ return {
       desc = "Goto/Apply Next Edit Suggestion",
     },
     {
-      "<c-.>",
+      "<c-s>",
       function()
         require("sidekick.cli").focus("opencode")
       end,
@@ -36,7 +36,7 @@ return {
       desc = "Sidekick Switch Focus",
     },
     {
-      "<c-.>",
+      "<c-s>",
       function()
         require("sidekick.cli").send({ name = "opencode", selection = true })
       end,
