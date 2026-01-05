@@ -8,10 +8,7 @@ return {
       ruby = { "rubocop" },
     }
 
-    lint.linters.rubocop.cmd = cutils.script_path("docker-cmd")
-    lint.linters.rubocop.args = {
-      vim.env.DOCKER_CONTAINER,
-      "bundle",
+    local rubocop_args = {
       "exec",
       "rubocop",
       "--format",
@@ -22,6 +19,15 @@ return {
         return vim.fn.expand("%:.")
       end,
     }
+
+    if vim.env.DOCKER_CONTAINER then
+      lint.linters.rubocop.cmd = cutils.script_path("docker-cmd")
+      vim.tbl_extend("force", rubocop_args, { vim.env.DOCKER_CONTAINER, "bundle" })
+    else
+      lint.linters.rubocop.cmd = "bundle"
+    end
+
+    lint.linters.rubocop.args = rubocop_args
 
     local lint_enabled = true
 
