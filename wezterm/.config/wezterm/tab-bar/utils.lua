@@ -6,11 +6,11 @@ local cache = {
   throttle = 5,
   ram_usage = {
     last_update = 0,
-    value = "N/A",
+    value = "",
   },
   cpu_usage = {
     last_update = 0,
-    value = "N/A",
+    value = "",
   },
 }
 
@@ -66,7 +66,7 @@ M.ram_usage = function()
     return fetch_cache_value("ram_usage", ram_usage_darwin)
   end
 
-  return "N/A"
+  return nil
 end
 
 M.cpu_usage = function()
@@ -74,7 +74,7 @@ M.cpu_usage = function()
     return fetch_cache_value("cpu_usage", cpu_usage_darwin)
   end
 
-  return "N/A"
+  return nil
 end
 
 return M
