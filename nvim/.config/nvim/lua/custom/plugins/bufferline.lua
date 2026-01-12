@@ -6,10 +6,7 @@ return {
   dependencies = "nvim-tree/nvim-web-devicons",
   event = "VeryLazy",
   config = function()
-    local highlights = require("rose-pine.plugins.bufferline")
-
     require("bufferline").setup({
-      highlights = highlights,
       options = {
         close_command = function(n)
           Snacks.bufdelete(n)

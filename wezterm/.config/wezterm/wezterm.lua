@@ -12,7 +12,7 @@ local neovim_nav = require("neovim-nav")
 config.max_fps = 165
 
 -- General appearance
-config.color_scheme = "Catppuccin Mocha"
+config.color_scheme = "Tokyo Night"
 config.font_size = 13
 config.window_padding = {
   left = 0,
