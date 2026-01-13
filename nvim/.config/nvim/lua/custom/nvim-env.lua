@@ -1,3 +1,5 @@
+---@module "snacks"
+
 local ENV_FILE = ".nvim-env.json"
 local ENV_VARS = { "DOCKER_CONTAINER", "DISABLE_LSP_SERVERS" }
 
@@ -14,5 +16,15 @@ local load_env = function()
     vim.env[key] = env_config[key]
   end
 end
+
+vim.api.nvim_create_autocmd("BufWritePost", {
+  group = vim.api.nvim_create_augroup("NvimEnv", { clear = true }),
+  pattern = ENV_FILE,
+  callback = function()
+    load_env()
+
+    Snacks.notifier.notify("Environment variables reloaded", "info", { title = "nvim-env" })
+  end,
+})
 
 load_env()
