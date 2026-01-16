@@ -120,6 +120,21 @@ return {
       desc = "Git commits current file",
     },
     {
+      "<leader>fg",
+      function()
+        Snacks.picker.git_status({
+          win = {
+            input = {
+              keys = {
+                ["<c-r>"] = { "git_restore", mode = { "n", "i" } },
+              },
+            },
+          },
+        })
+      end,
+      desc = "Git status",
+    },
+    {
       "<leader>fb",
       function()
         Snacks.picker.git_branches({
