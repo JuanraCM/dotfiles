@@ -15,10 +15,10 @@ return {
 
     vim.o.autoread = true
 
-    vim.keymap.set({ "n" }, "<c-o>", function()
+    vim.keymap.set({ "n", "x" }, "<C-O>", function()
       require("opencode").ask("@this: ", { submit = true })
     end, { desc = "Ask opencode…" })
-    vim.keymap.set({ "n", "x" }, "<C-p>", function()
+    vim.keymap.set({ "n", "x" }, "<C-S-O>", function()
       require("opencode").select()
     end, { desc = "Execute opencode action…" })
     vim.keymap.set({ "n", "t" }, "<C-.>", function()
