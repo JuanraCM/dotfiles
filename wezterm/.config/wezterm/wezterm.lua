@@ -13,13 +13,17 @@ config.max_fps = 165
 
 -- General appearance
 config.color_scheme = "Tokyo Night"
-config.font_size = 13
 config.window_padding = {
   left = 0,
   right = 0,
   top = 0,
   bottom = 0,
 }
+if wezterm.target_triple == "x86_64-apple-darwin" then
+  config.font_size = 13
+else
+  config.font_size = 11
+end
 
 -- Tab bar settings
 config.tab_bar_at_bottom = true
