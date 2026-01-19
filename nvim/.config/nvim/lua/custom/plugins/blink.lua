@@ -21,7 +21,11 @@ return {
 
     require("blink.cmp").setup({
       fuzzy = { implementation = "rust" },
-      keymap = { preset = "default" },
+      keymap = {
+        preset = "default",
+        ["<C-Space>"] = false,
+        ["<C-s>"] = { "show" }
+      },
       appearance = {
         use_nvim_cmp_as_default = true,
         nerd_font_variant = "mono",
@@ -57,8 +61,8 @@ return {
         menu = {
           draw = {
             columns = {
-              { "label", "label_description", gap = 1 },
-              { "kind_icon", "kind", "source_name", gap = 1 },
+              { "label",     "label_description", gap = 1 },
+              { "kind_icon", "kind",              "source_name", gap = 1 },
             },
           },
         },
