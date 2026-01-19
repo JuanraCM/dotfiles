@@ -17,7 +17,7 @@ return {
           -- Load luvit types when the `vim.uv` word is found
           { path = "luvit-meta/library", words = { "vim%.uv" } },
           -- Load the wezterm types when the `wezterm` module is required
-          { path = "wezterm-types", mods = { "wezterm" } },
+          { path = "wezterm-types",      mods = { "wezterm" } },
         },
       },
     },
@@ -38,6 +38,7 @@ return {
       emmet_language_server = {},
       clangd = {},
       jsonls = {},
+      yamlls = {},
       bashls = {},
       nil_ls = {},
     }
