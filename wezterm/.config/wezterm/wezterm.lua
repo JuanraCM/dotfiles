@@ -19,7 +19,7 @@ config.window_padding = {
   top = 0,
   bottom = 0,
 }
-if wezterm.target_triple == "x86_64-apple-darwin" then
+if wezterm.target_triple:find("darwin") then
   config.font_size = 13
 else
   config.font_size = 11
