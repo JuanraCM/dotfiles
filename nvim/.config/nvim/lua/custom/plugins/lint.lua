@@ -22,7 +22,8 @@ return {
 
     if vim.env.DOCKER_CONTAINER then
       lint.linters.rubocop.cmd = cutils.script_path("docker-cmd")
-      vim.tbl_extend("force", rubocop_args, { vim.env.DOCKER_CONTAINER, "bundle" })
+      table.insert(rubocop_args, 1, vim.env.DOCKER_CONTAINER)
+      table.insert(rubocop_args, 2, "bundle")
     else
       lint.linters.rubocop.cmd = "bundle"
     end
