@@ -132,3 +132,9 @@ automatically-unhide-macos-hidden-apps = false
   3 = '^MSI.*$'
   4 = '^MSI.*$'
   5 = '^MSI.*$'
+
+[[on-window-detected]]
+if.app-id = 'com.google.Chromium'
+if.window-title-regex-substring = 'Picture-in-Picture'
+run = 'layout floating'
+check-further-callbacks = true
