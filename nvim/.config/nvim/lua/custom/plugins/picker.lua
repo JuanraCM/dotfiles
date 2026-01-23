@@ -193,6 +193,13 @@ return {
       desc = "Find nvim plugins",
     },
     {
+      "<leader>fP",
+      function()
+        Snacks.picker.pickers()
+      end,
+      desc = "Find pickers",
+    },
+    {
       "<leader>fR",
       function()
         Snacks.picker.resume()
