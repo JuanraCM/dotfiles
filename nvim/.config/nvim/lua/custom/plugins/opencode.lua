@@ -5,11 +5,11 @@ return {
     vim.g.opencode_opts = {
       provider = {
         enabled = "wezterm",
-      },
-      wezterm = {
-        direction = "bottom",
-        top_level = false,
-        percent = 50,
+        wezterm = {
+          direction = "right",
+          top_level = false,
+          percent = 35,
+        },
       },
     }
 
