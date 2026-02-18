@@ -10,6 +10,18 @@
     "plan": {
       "model": "github-copilot/claude-opus-4.6",
     },
+    "chat": {
+      "model": "github-copilot/gpt-5-mini",
+      "description": "A fast and efficient model for general chat interactions. Suitable for real-time conversations and quick responses.",
+      "prompt": "{file:./prompts/chat.txt}",
+      "mode": "primary",
+      "tempature": 0.5,
+      "tools": {
+        "write": false,
+        "edit": false,
+        "bash": false
+      }
+    }
   },
   "mcp": {
     "hub": {
