@@ -12,10 +12,22 @@
     },
     "chat": {
       "model": "github-copilot/gpt-5-mini",
-      "description": "A fast and efficient model for general chat interactions. Suitable for real-time conversations and quick responses.",
+      "description": "An agent for general chat interactions. Suitable for real-time conversations and quick responses.",
       "prompt": "{file:./prompts/chat.txt}",
       "mode": "primary",
       "tempature": 0.5,
+      "tools": {
+        "write": false,
+        "edit": false,
+        "bash": false
+      }
+    },
+    "code-review": {
+      "model": "github-copilot/claude-sonnet-4.6",
+      "description": "An agent specialized in code review and analysis. Ideal for providing detailed feedback on code quality, style, and potential issues.",
+      "prompt": "{file:./prompts/code-review.txt}",
+      "mode": "subagent",
+      "tempature": 0.2,
       "tools": {
         "write": false,
         "edit": false,
