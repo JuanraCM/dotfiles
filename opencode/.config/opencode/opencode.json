@@ -9,6 +9,9 @@
     },
     "plan": {
       "model": "github-copilot/claude-opus-4.6",
+      "permission": {
+        "edit": "ask"
+      }
     },
     "chat": {
       "model": "github-copilot/gpt-5-mini",
@@ -16,10 +19,9 @@
       "prompt": "{file:./prompts/chat.txt}",
       "mode": "primary",
       "tempature": 0.5,
-      "tools": {
-        "write": false,
-        "edit": false,
-        "bash": false
+      "permission": {
+        "edit": "deny",
+        "bash": "ask"
       }
     },
     "code-review": {
@@ -28,10 +30,8 @@
       "prompt": "{file:./prompts/code-review.txt}",
       "mode": "subagent",
       "tempature": 0.2,
-      "tools": {
-        "write": false,
-        "edit": false,
-        "bash": false
+      "permission": {
+        "edit": "deny",
       }
     }
   },
