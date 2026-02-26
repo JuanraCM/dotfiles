@@ -47,6 +47,7 @@
     "messages_half_page_up": "ctrl+u",
     "messages_half_page_down": "ctrl+d",
     "messages_page_up": "ctrl+shift+u",
-    "messages_page_down": "ctrl+shift+d"
+    "messages_page_down": "ctrl+shift+d",
+    "app_exit": "ctrl+c,<leader>q"
   }
 }
