@@ -1,6 +1,5 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "theme": "tokyonight",
   "model": "github-copilot/claude-sonnet-4.6",
   "autoupdate": true,
   "agent": {
@@ -42,12 +41,5 @@
       "url": "http://localhost:37373/mcp",
       "headers": {}
     }
-  },
-  "keybinds": {
-    "messages_half_page_up": "ctrl+u",
-    "messages_half_page_down": "ctrl+d",
-    "messages_page_up": "ctrl+shift+u",
-    "messages_page_down": "ctrl+shift+d",
-    "app_exit": "ctrl+c,<leader>q"
   }
 }
