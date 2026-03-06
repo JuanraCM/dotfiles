@@ -3,13 +3,15 @@ return {
   config = function()
     ---@type opencode.Opts
     vim.g.opencode_opts = {
-      provider = {
-        enabled = "wezterm",
-        wezterm = {
-          direction = "right",
-          top_level = false,
-          percent = 35,
-        },
+      server = {
+        port = 4096,
+        start = function()
+          local cmd = "opencode --port"
+          local direction = "right"
+          local percent = 35
+
+          vim.fn.system(string.format("wezterm cli split-pane --%s --percent %d -- %s", direction, percent, cmd))
+        end,
       },
     }
 
@@ -22,8 +24,8 @@ return {
       require("opencode").select()
     end, { desc = "Execute opencode action…" })
     vim.keymap.set({ "n", "t" }, "<C-.>", function()
-      require("opencode").toggle()
-    end, { desc = "Toggle opencode" })
+      require("opencode").start()
+    end, { desc = "Start opencode" })
 
     vim.keymap.set({ "n", "x" }, "go", function()
       return require("opencode").operator("@this ")
