@@ -10,7 +10,6 @@ return {
       ignore_install = {},
       sync_install = false,
       auto_install = true,
-      highlight = { enable = true },
       indent = {
         enable = true,
         disable = { "ruby" },
@@ -29,6 +28,17 @@ return {
           },
         },
       },
+    })
+
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = { "*" },
+      callback = function(ev)
+        _, error = vim.treesitter.get_parser(ev.buf)
+
+        if not error then
+          vim.treesitter.start(ev.buf)
+        end
+      end,
     })
 
     query.add_directive("set-lang-from-filename!", function(_, _, bufnr, _, metadata)
