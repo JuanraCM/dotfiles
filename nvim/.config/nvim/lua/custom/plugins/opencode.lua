@@ -4,7 +4,6 @@ return {
     ---@type opencode.Opts
     vim.g.opencode_opts = {
       server = {
-        port = 4096,
         start = function()
           local cmd = "opencode --port"
           local direction = "right"
