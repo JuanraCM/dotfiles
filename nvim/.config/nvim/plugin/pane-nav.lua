@@ -1,7 +1,12 @@
 local wezterm_directions = { h = "Left", j = "Down", k = "Up", l = "Right" }
+local tmux_directions = { h = "L", j = "D", k = "U", l = "R" }
 
 local function at_edge(direction)
   return vim.fn.winnr() == vim.fn.winnr(direction)
+end
+
+local function in_tmux()
+  return vim.env.TMUX ~= nil and vim.env.TMUX ~= ""
 end
 
 local function wezterm_exec(cmd)
@@ -19,9 +24,17 @@ local function send_key_to_wezterm(direction)
   wezterm_exec({ "activate-pane-direction", wezterm_directions[direction] })
 end
 
+local function send_key_to_tmux(direction)
+  vim.fn.system({ "tmux", "select-pane", "-" .. tmux_directions[direction] })
+end
+
 local function move(direction)
   if at_edge(direction) then
-    send_key_to_wezterm(direction)
+    if in_tmux() then
+      send_key_to_tmux(direction)
+    else
+      send_key_to_wezterm(direction)
+    end
   else
     vim.cmd("wincmd " .. direction)
   end
