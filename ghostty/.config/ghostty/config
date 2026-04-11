@@ -1,3 +1,2 @@
-command = /bin/zsh -c tmux
-theme = Catppuccin Mocha
+theme = TokyoNight
 macos-option-as-alt = right
