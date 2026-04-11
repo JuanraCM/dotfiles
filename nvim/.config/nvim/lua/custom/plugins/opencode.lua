@@ -6,10 +6,10 @@ return {
       server = {
         start = function()
           local cmd = "opencode --port"
-          local direction = "right"
           local percent = 35
 
-          vim.fn.system(string.format("wezterm cli split-pane --%s --percent %d -- %s", direction, percent, cmd))
+          -- vim.fn.system(string.format("wezterm cli split-pane --right --percent %d -- %s", direction, percent, cmd))
+          vim.fn.system(string.format("tmux split-window -h -f -p %d -- %s", percent, cmd))
         end,
       },
     }
