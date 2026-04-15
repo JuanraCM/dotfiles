@@ -109,7 +109,7 @@ automatically-unhide-macos-hidden-apps = false
     # See: https://nikitabobko.github.io/AeroSpace/commands#mode
     cmd-shift-comma = 'mode service'
 
-    cmd-enter = 'exec-and-forget open -a /Applications/WezTerm.app/'
+    cmd-enter = 'exec-and-forget open -a /Applications/Ghostty.app/'
     cmd-b = 'exec-and-forget open -a /Applications/Google\ Chrome.app/'
     cmd-o = 'exec-and-forget open -a /Applications/Obsidian.app/'
     cmd-d = 'exec-and-forget open -a /Applications/Discord.app/'
