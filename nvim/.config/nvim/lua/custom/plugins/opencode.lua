@@ -8,21 +8,17 @@ return {
           local cmd = "opencode --port"
           local percent = 35
 
-          -- vim.fn.system(string.format("wezterm cli split-pane --right --percent %d -- %s", direction, percent, cmd))
-          vim.fn.system(string.format("tmux split-window -h -f -p %d -- %s", percent, cmd))
+          vim.fn.system(string.format("tmux split-window -h -f -d -p %d -- %s", percent, cmd))
         end,
       },
     }
 
     vim.o.autoread = true
 
-    vim.keymap.set({ "n", "x" }, "<C-O>", function()
-      require("opencode").ask("@this: ", { submit = true })
-    end, { desc = "Ask opencode…" })
     vim.keymap.set({ "n", "x" }, "<C-S-O>", function()
       require("opencode").select()
     end, { desc = "Execute opencode action…" })
-    vim.keymap.set({ "n", "t" }, "<C-.>", function()
+    vim.keymap.set({ "n", "t" }, "<C-O>", function()
       require("opencode").start()
     end, { desc = "Start opencode" })
 
