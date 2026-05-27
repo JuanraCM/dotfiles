@@ -1,5 +1,6 @@
 return {
   "github/copilot.vim",
+  event = "InsertEnter",
   config = function()
     vim.keymap.set("i", "<c-l>", "<Plug>(copilot-accept-word)")
     vim.keymap.set("i", "<c-j>", 'copilot#Accept("<CR>")', {
