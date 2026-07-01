@@ -8,6 +8,11 @@ if type -q mise
   mise activate fish | source
 end
 
+# Setup devenv if available
+if type -q devenv
+  devenv hook fish | source
+end
+
 # Set default editor
 set -x EDITOR nvim
 
