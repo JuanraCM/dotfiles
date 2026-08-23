@@ -18,11 +18,6 @@ return {
       },
       sources = {
         default = { "lsp", "path", "snippets", "buffer", "lazydev" },
-        per_filetype = {
-          sql = { "snippets", "dadbod", "buffer" },
-          mysql = { "snippets", "dadbod", "buffer" },
-          codecompanion = { "codecompanion" },
-        },
         providers = {
           lsp = { async = true },
           lazydev = {
@@ -35,10 +30,6 @@ return {
             opts = {
               search_paths = { vim.fn.stdpath("config") .. "/lua/custom/snippets" },
             },
-          },
-          dadbod = {
-            name = "Dadbod",
-            module = "vim_dadbod_completion.blink",
           },
         },
       },
