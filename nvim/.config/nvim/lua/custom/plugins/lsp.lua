@@ -29,6 +29,7 @@ return {
     local servers = {
       lua_ls = {},
       ruby_lsp = {},
+      rubocop = {},
       solargraph = {},
       rust_analyzer = {},
       eslint = {},
