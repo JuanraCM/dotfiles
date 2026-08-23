@@ -5,20 +5,6 @@ return {
     "rafamadriz/friendly-snippets",
   },
   config = function()
-    local custom_vars = {
-      lazy = {
-        BDD_TASK_ID = function()
-          local branch_name = vim.system({ "git", "branch", "--show-current" }, { text = true }):wait().stdout
-          return branch_name and vim.split(branch_name, "-")[2] or "UNKNOWN"
-        end,
-      },
-      eager = {},
-    }
-
-    local registry = require("blink.cmp.sources.snippets.default.registry")
-    local aggregated_vars = vim.tbl_deep_extend("force", registry.builtin_vars, custom_vars)
-    registry.builtin_vars = aggregated_vars
-
     require("blink.cmp").setup({
       fuzzy = { implementation = "rust" },
       keymap = {
