@@ -1,2 +1,3 @@
-theme = TokyoNight
+confirm-close-surface = false
 macos-option-as-alt = right
+theme = TokyoNight
