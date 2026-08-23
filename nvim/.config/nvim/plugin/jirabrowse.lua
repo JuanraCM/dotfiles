@@ -1,4 +1,4 @@
-local JIRA_BASE_URL = "https://tirantmodulos.atlassian.net/browse/"
+local JIRA_BASE_URL = "JIRA_BASE_URL"
 
 local function fetch_current_line_commit()
   local line_num = vim.api.nvim_win_get_cursor(0)[1]

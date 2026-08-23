@@ -16,7 +16,7 @@ local open_pi_agent = function()
     return
   end
 
-  local output = vim.fn.system(string.format("tmux split-window -d -h -f -p %d -F '#{pane_id}' -P -- pi", PANE_WIDTH))
+  local output = vim.fn.system(string.format("tmux split-window -d -h -f -p %d -F '#{pane_id}' -P -- claude", PANE_WIDTH))
   current_pane_id = vim.fn.trim(output)
 end
 
