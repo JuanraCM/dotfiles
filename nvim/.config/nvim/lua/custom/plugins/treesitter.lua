@@ -3,6 +3,18 @@ return {
   dependencies = "nvim-treesitter/nvim-treesitter-textobjects",
   build = ":TSUpdate",
   config = function()
+    -- Start treesitter if available
+    vim.api.nvim_create_autocmd('FileType', {
+      pattern = { '*' },
+      callback = function(ev)
+        _, error = vim.treesitter.get_parser(ev.buf)
+
+        if not error then
+          vim.treesitter.start(ev.buf)
+        end
+      end,
+    })
+
     -- Textobject keymaps
     vim.keymap.set({ "x", "o" }, "af", function()
       require("nvim-treesitter-textobjects.select").select_textobject("@function.outer", "textobjects")
