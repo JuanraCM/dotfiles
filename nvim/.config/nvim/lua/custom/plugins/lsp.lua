@@ -6,18 +6,11 @@ return {
     "williamboman/mason.nvim",
     {
       "folke/lazydev.nvim",
-      dependencies = {
-        "DrKJeff16/wezterm-types",
-        lazy = true,
-        version = false,
-      },
       ft = "lua",
       opts = {
         library = {
           -- Load luvit types when the `vim.uv` word is found
           { path = "luvit-meta/library", words = { "vim%.uv" } },
-          -- Load the wezterm types when the `wezterm` module is required
-          { path = "wezterm-types",      mods = { "wezterm" } },
         },
       },
     },
@@ -27,21 +20,20 @@ return {
     require("lazydev").setup()
 
     local servers = {
-      lua_ls = {},
-      ruby_lsp = {},
-      rubocop = {},
-      solargraph = {},
-      rust_analyzer = {},
-      eslint = {},
-      ts_ls = {},
-      pyright = {},
-      ruff = {},
-      emmet_language_server = {},
-      clangd = {},
-      jsonls = {},
-      yamlls = {},
       bashls = {},
+      clangd = {},
+      emmet_language_server = {},
+      eslint = {},
+      jsonls = {},
+      lua_ls = {},
       nil_ls = {},
+      pyright = {},
+      rubocop = {},
+      ruby_lsp = {},
+      ruff = {},
+      rust_analyzer = {},
+      ts_ls = {},
+      yamlls = {},
     }
 
     local capabilities = require("blink.cmp").get_lsp_capabilities()
@@ -90,7 +82,7 @@ return {
       callback = function(ev)
         local client = vim.lsp.get_client_by_id(ev.data.client_id)
 
-        if not client or client.name == "solargraph" then
+        if not client then
           return
         end
 
