@@ -1,6 +1,8 @@
 {
-  "model": "sonnet",
-  "enabledPlugins": {},
+  "model": "opusplan",
+  "enabledPlugins": {
+    "caveman@caveman": true
+  },
   "theme": "dark",
   "editorMode": "vim"
 }
