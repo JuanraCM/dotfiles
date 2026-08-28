@@ -33,8 +33,9 @@ local find_agent_pane = function()
 end
 
 local open_agent = function()
+  local cmd = vim.fn.executable("caveman") == 1 and ("caveman " .. AGENT_CMD) or AGENT_CMD
   local output = vim.fn.system(
-    string.format("tmux split-window -d -h -f -p %d -F '#{pane_id}' -P -- %s", PANE_WIDTH, AGENT_CMD)
+    string.format("tmux split-window -d -h -f -p %d -F '#{pane_id}' -P -- %s", PANE_WIDTH, cmd)
   )
   return vim.fn.trim(output)
 end
