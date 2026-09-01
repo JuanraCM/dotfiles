@@ -7,7 +7,7 @@ return {
     vim.api.nvim_create_autocmd('FileType', {
       pattern = { '*' },
       callback = function(ev)
-        _, error = vim.treesitter.get_parser(ev.buf)
+        local _, error = vim.treesitter.get_parser(ev.buf)
 
         if not error then
           vim.treesitter.start(ev.buf)
