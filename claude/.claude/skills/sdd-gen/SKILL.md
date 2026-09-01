@@ -16,8 +16,13 @@ $ARGUMENTS
 
 ## Instructions
 
-1. Create `.specs/<slug>.md` using `./assets/spec-template.md`
-2. Fill in the template based on the input provided
+1. Create a spec by calling the following script:
+
+    ```bash
+    bash ./scripts/create_spec.sh <spec-slug>
+    ```
+
+2. Fill in the output spec file based on the input provided
 
 ## Guidelines
 
