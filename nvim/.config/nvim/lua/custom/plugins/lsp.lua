@@ -28,11 +28,18 @@ return {
       lua_ls = {},
       nil_ls = {},
       pyright = {},
-      rubocop = {},
-      ruby_lsp = {},
+      rubocop = {
+        cmd = { "bundle", "exec", "rubocop", "--lsp" },
+      },
+      ruby_lsp = {
+        cmd = { "bundle", "exec", "ruby-lsp" },
+      },
+      sorbet = {
+        cmd = { "bundle", "exec", "srb", "tc", "--lsp", "--disable-watchman" },
+      },
       ruff = {},
       rust_analyzer = {},
-      ts_ls = {},
+      tsc = {},
       yamlls = {},
     }
 
