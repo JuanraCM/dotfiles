@@ -53,3 +53,4 @@ vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 
 -- Remap for exiting terminal mode
 vim.keymap.set("t", "<c-q>", "<c-\\><c-n>", { desc = "Exit terminal mode" })
+vim.keymap.set("t", "<c-h>", "<c-\\><c-n><c-w>h", { desc = "Exit terminal mode and move to left window" })
