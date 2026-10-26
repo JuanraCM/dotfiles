@@ -1,7 +1,21 @@
 return {
   "coder/claudecode.nvim",
   dependencies = { "folke/snacks.nvim" },
-  config = true,
+  config = function(_, opts)
+    require("claudecode").setup(opts)
+
+    vim.api.nvim_create_autocmd("WinLeave", {
+      group = vim.api.nvim_create_augroup("ClaudeCodeChecktime", { clear = true }),
+      desc = "Run checktime on all buffers when leaving the Claude Code panel",
+      callback = function(args)
+        if args.buf == require("claudecode.terminal").get_active_terminal_bufnr() then
+          vim.schedule(function()
+            vim.cmd("silent! checktime")
+          end)
+        end
+      end,
+    })
+  end,
   cmd = {
     "ClaudeCode",
     "ClaudeCodeFocus",
