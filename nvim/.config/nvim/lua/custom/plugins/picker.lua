@@ -130,6 +130,7 @@ return {
               },
             },
           },
+          layout = "sidebar",
         })
       end,
       desc = "Git status",
