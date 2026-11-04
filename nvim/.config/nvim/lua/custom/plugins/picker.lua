@@ -100,6 +100,7 @@ return {
               },
             },
           },
+          layout = "sidebar",
         })
       end,
       desc = "Git commits",
@@ -115,6 +116,7 @@ return {
               },
             },
           },
+          layout = "sidebar",
         })
       end,
       desc = "Git commits current file",
