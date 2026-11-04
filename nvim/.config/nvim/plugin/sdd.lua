@@ -31,7 +31,8 @@ local handle_specs_command = function(opts)
     return
   end
 
-  local dir = SPECS_FOLDER .. "/" .. subcmd
+  local root = vim.fs.root(vim.fn.getcwd(), ".git") or vim.fn.getcwd()
+  local dir = vim.fs.joinpath(root, SPECS_FOLDER, subcmd)
   local items = retrieve_specs(dir)
 
   if #items == 0 then
