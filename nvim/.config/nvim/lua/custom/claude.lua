@@ -63,7 +63,7 @@ local function open_pane(cmd_string, env_table, focus)
     return
   end
 
-  local cwd = vim.fn.getcwd()
+  local cwd = vim.fs.root(vim.fn.getcwd(), ".git") or vim.fn.getcwd()
 
   if in_herdr() then
     local args = { "pane", "split", "--current", "--direction", "right", "--cwd", cwd }
