@@ -29,6 +29,8 @@ move_tab_next = "prefix+right"
 # Workspaces
 detach = "prefix+d"
 rename_workspace = "prefix+shift+comma"
+previous_workspace = "prefix+ctrl+p"
+next_workspace = "prefix+ctrl+n"
 
 [ui]
 tab_bar_position = "bottom"
