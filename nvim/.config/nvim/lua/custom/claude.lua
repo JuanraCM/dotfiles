@@ -1,11 +1,16 @@
--- Native Herdr/tmux split pane provider for claudecode.nvim.
+-- Native herdr / herdr-app / tmux split pane provider for claudecode.nvim.
 
 local M = {}
 
 local pane_id
+local terminal_id -- herdr-app only
 
 local function in_herdr()
   return (vim.env.HERDR_PANE_ID or "") ~= ""
+end
+
+local function in_herdr_app()
+  return (vim.env.HC_TERMINAL_ID or "") ~= ""
 end
 
 local function in_tmux()
@@ -15,6 +20,14 @@ end
 local function herdr(args)
   local bin = (vim.env.HERDR_BIN_PATH or "") ~= "" and vim.env.HERDR_BIN_PATH or "herdr"
   return vim.system(vim.list_extend({ bin }, args), { text = true }):wait()
+end
+
+local function app(cmd, args)
+  return vim.system({ "herdr-app", "do", cmd, vim.json.encode(args) }, { text = true }):wait()
+end
+
+local function hc(args)
+  return vim.system(vim.list_extend({ "hc" }, args), { text = true }):wait()
 end
 
 local function tmux(args)
@@ -30,6 +43,12 @@ local function pane_alive()
     return herdr({ "pane", "get", pane_id }).code == 0
   end
 
+  if in_herdr_app() then
+    local res = hc({ "get", terminal_id, "--json" })
+    local ok, decoded = pcall(vim.json.decode, res.stdout or "")
+    return res.code == 0 and ok and decoded.state == "live"
+  end
+
   local out = tmux({ "list-panes", "-a", "-F", "#{pane_id}" })
   return vim.tbl_contains(vim.split(out.stdout or "", "\n", { trimempty = true }), pane_id)
 end
@@ -37,6 +56,8 @@ end
 local function focus_pane()
   if in_herdr() then
     herdr({ "pane", "focus", "--pane", vim.env.HERDR_PANE_ID, "--direction", "right" })
+  elseif in_herdr_app() then
+    app("pane.focus", { pane = pane_id })
   else
     tmux({ "select-pane", "-t", pane_id })
   end
@@ -46,12 +67,14 @@ local function close_pane()
   if pane_alive() then
     if in_herdr() then
       herdr({ "pane", "close", pane_id })
+    elseif in_herdr_app() then
+      app("pane.close", { pane = pane_id })
     else
       tmux({ "kill-pane", "-t", pane_id })
     end
   end
 
-  pane_id = nil
+  pane_id, terminal_id = nil, nil
 end
 
 local function open_pane(cmd_string, env_table, focus)
@@ -82,6 +105,23 @@ local function open_pane(cmd_string, env_table, focus)
     if focus then
       focus_pane()
     end
+  elseif in_herdr_app() then
+    local argv = { "env" }
+    for k, v in pairs(env_table) do
+      table.insert(argv, k .. "=" .. v)
+    end
+    vim.list_extend(argv, { "sh", "-c", cmd_string })
+
+    local res = app("terminal.open", { argv = argv, folder = cwd, place = "right" })
+    local ok, decoded = pcall(vim.json.decode, res.stdout or "")
+    if not ok or decoded.error then
+      return vim.notify("herdr-app split failed: " .. (res.stdout or "") .. (res.stderr or ""), vim.log.levels.ERROR)
+    end
+
+    pane_id, terminal_id = decoded.pane, decoded.terminal
+    if not focus then
+      app("pane.focus", { terminal = vim.env.HC_TERMINAL_ID })
+    end
   else
     local args = { "split-window", "-h", "-P", "-F", "#{pane_id}", "-c", cwd }
     if not focus then
@@ -111,6 +151,8 @@ function M.send(text)
   if in_herdr() then
     herdr({ "pane", "send-text", pane_id, text })
     herdr({ "pane", "send-keys", pane_id, "Enter" })
+  elseif in_herdr_app() then
+    hc({ "send", terminal_id, text })
   else
     tmux({ "send-keys", "-t", pane_id, "-l", text })
     tmux({ "send-keys", "-t", pane_id, "Enter" })
@@ -121,7 +163,7 @@ end
 function M.setup() end
 
 function M.is_available()
-  return in_herdr() or in_tmux()
+  return in_herdr() or in_herdr_app() or in_tmux()
 end
 
 function M.open(cmd_string, env_table, _, focus)
