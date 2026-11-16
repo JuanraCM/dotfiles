@@ -1,10 +1,10 @@
 // GitHub work: my open PRs and the PRs where my review is directly requested.
 // One `gh api graphql` call feeds both lists (gh handles auth). Opened with ctrl-shift-g (keys.json).
-// Keys: j/k or ctrl-n/ctrl-p move, ctrl-d/ctrl-u jump, g/G first/last, o/enter open in browser, r refresh, q/esc close.
+// Keys: j/k or ctrl-n/ctrl-p move, ctrl-d/ctrl-u jump, g/G first/last, o/enter open in browser, w worktree (worktrunk), r refresh, q/esc close.
 
 import { View, div } from "gpui-kit";
 import { v_flex, h_flex, ScrollHandle } from "gpui-base";
-import { exec, theme, props, closeOverlay, nextCommand, checking } from "herdr";
+import { exec, notify, shared, setShared, spaces, focused, theme, props, closeOverlay, nextCommand, checking } from "herdr";
 
 const QUERY = `
 fragment pr on PullRequest {
@@ -44,6 +44,7 @@ export default class GitHub extends View {
     this.loading = false;
     this.error = null;
     this.updated = null;
+    this.checkingRepo = false;
     // As a pane, pane.go hands over the keyboard with "focus".
     cx.spawn(async (cx) => {
       for (;;) if ((await nextCommand()) === "focus") this.handle.focus();
@@ -90,6 +91,41 @@ export default class GitHub extends View {
     if (pr) exec("open", [pr.url]);
   }
 
+  // owner/repo of each remote of the git repo at dir (none outside a repo).
+  async remotes(dir) {
+    const r = await exec("git", ["remote", "-v"], { cwd: dir, timeout: 10_000 });
+    if (r.code !== 0) return [];
+    return r.stdout
+      .split("\n")
+      .map((l) => l.split(/\s+/)[1]?.replace(/\.git$/, "").match(/[:/]([^/:]+\/[^/]+)$/)?.[1].toLowerCase())
+      .filter(Boolean);
+  }
+
+  // Queues the PR's worktree on the worktrees mod, which runs worktrunk (so its hooks run), shows
+  // progress in the sidebar and opens it as a space. Runs in the focused terminal's folder, which
+  // must be a checkout of the PR's repo.
+  worktree(pr, cx) {
+    if (!pr || this.checkingRepo) return;
+    const repo = pr.repository.nameWithOwner;
+    const label = `${repo.split("/")[1]}#${pr.number}`;
+    this.checkingRepo = true;
+    cx.spawn(async (cx) => {
+      try {
+        const f = focused();
+        const dir = f?.cwd || spaces().find((s) => s.id === f?.space)?.folder;
+        if (!dir) throw new Error("No focused terminal folder");
+        if (!(await this.remotes(dir)).includes(repo.toLowerCase())) throw new Error(`${dir} is not a checkout of ${repo}`);
+        const job = { op: "switch", folder: dir, target: `pr:${pr.number}`, label };
+        setShared("worktrees.jobs", { ...(shared("worktrees.jobs") ?? {}), [`${Date.now()}-${pr.number}`]: job });
+        if (props()?.overlay) closeOverlay(props().overlay);
+      } catch (e) {
+        notify({ title: `Worktree for ${label} failed`, body: String(e?.message ?? e), level: "error" });
+      }
+      this.checkingRepo = false;
+      cx.notify();
+    });
+  }
+
   key(e, cx) {
     const k = e.key, ctrl = e.modifiers.control;
     if (ctrl && k === "n") this.move(this.at + 1);
@@ -102,6 +138,7 @@ export default class GitHub extends View {
     else if (e.key_char === "G") this.move(this.items.length - 1);
     else if (k === "g") this.move(0);
     else if (k === "o" || k === "enter") this.open(this.items[this.at]);
+    else if (k === "w") this.worktree(this.items[this.at], cx);
     else if (k === "r") this.refresh(cx);
     else if ((k === "q" || k === "escape") && props()?.overlay) return closeOverlay(props()?.overlay);
     else return;
@@ -166,7 +203,7 @@ export default class GitHub extends View {
       : this.loading
         ? div().text_color(t.dim).frames(SPINNER.map((s) => `${s} refreshing`), 90)
         : div().text_color(t.dim).child(this.updated ? `updated ${this.updated.toTimeString().slice(0, 5)}` : "");
-    const hints = "j/k move · o open · r refresh" + (props()?.overlay ? " · q close" : "");
+    const hints = "j/k move · o open · w worktree · r refresh" + (props()?.overlay ? " · q close" : "");
     return v_flex()
       .id("github")
       .track_focus(this.handle)
