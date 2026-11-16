@@ -31,7 +31,8 @@
     "ctrl-shift-p": "app.palette",
     "ctrl-,": "app.settings",
     "ctrl-space": "mod.open:prefix",
-    "ctrl-shift-g": "mod.open:github"
+    "ctrl-shift-g": "mod.open:github",
+    "ctrl-shift-e": {"command": "terminal.open", "args": {"argv": ["nvim"], "place": "right"}}
   },
   "terminal": {
     "ctrl-backspace": "send:\u0017",
