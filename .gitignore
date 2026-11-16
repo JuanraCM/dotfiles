@@ -1,2 +1,5 @@
 # Opencode restricted agents
 opencode/.config/opencode/agent/tirant.md
+
+# Herdr mods generated types
+herdr/.config/herdr-app/mods/*/gpui-kit.d.ts
