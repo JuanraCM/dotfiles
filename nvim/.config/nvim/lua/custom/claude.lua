@@ -4,6 +4,7 @@ local M = {}
 
 local pane_id
 local terminal_id -- herdr-app only
+local adopted = false -- herdr-app only: an agent already in the tab, not started by us
 
 local function in_herdr()
   return (vim.env.HERDR_PANE_ID or "") ~= ""
@@ -32,6 +33,25 @@ end
 
 local function tmux(args)
   return vim.system(vim.list_extend({ "tmux" }, args), { text = true }):wait()
+end
+
+-- A Claude already running in the same herdr-app tab as this Neovim, if any.
+local function find_agent()
+  local res = vim.system({ "herdr-app", "ls" }, { text = true }):wait()
+  local ok, decoded = pcall(vim.json.decode, res.stdout or "")
+  if res.code ~= 0 or not ok then
+    return nil
+  end
+
+  local me = vim.env.HC_TERMINAL_ID
+  for _, space in ipairs(decoded.spaces or {}) do
+    for _, tab in ipairs(space.tabs or {}) do
+      local terminals = tab.terminals or {}
+      if vim.iter(terminals):any(function(t) return t.terminal == me end) then
+        return vim.iter(terminals):find(function(t) return t.app == "claude-code" and t.terminal ~= me end)
+      end
+    end
+  end
 end
 
 local function pane_alive()
@@ -64,7 +84,8 @@ local function focus_pane()
 end
 
 local function close_pane()
-  if pane_alive() then
+  -- An adopted agent outlives Neovim's toggle: only forget it.
+  if pane_alive() and not adopted then
     if in_herdr() then
       herdr({ "pane", "close", pane_id })
     elseif in_herdr_app() then
@@ -74,7 +95,7 @@ local function close_pane()
     end
   end
 
-  pane_id, terminal_id = nil, nil
+  pane_id, terminal_id, adopted = nil, nil, false
 end
 
 local function open_pane(cmd_string, env_table, focus)
@@ -106,6 +127,19 @@ local function open_pane(cmd_string, env_table, focus)
       focus_pane()
     end
   elseif in_herdr_app() then
+    local agent = find_agent()
+    if agent then
+      pane_id, terminal_id, adopted = agent.pane, agent.terminal, true
+      if focus then
+        focus_pane()
+      end
+      -- It wasn't started with CLAUDE_CODE_SSE_PORT, so it only talks to Neovim after /ide.
+      if not require("claudecode").is_claude_connected() then
+        vim.notify("Using Claude in " .. terminal_id .. ": run /ide there to connect it to Neovim", vim.log.levels.INFO)
+      end
+      return
+    end
+
     local argv = { "env" }
     for k, v in pairs(env_table) do
       table.insert(argv, k .. "=" .. v)
