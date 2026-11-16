@@ -30,7 +30,8 @@
     "ctrl-shift-k": "mod.open:picker",
     "ctrl-shift-p": "app.palette",
     "ctrl-,": "app.settings",
-    "ctrl-space": "mod.open:prefix"
+    "ctrl-space": "mod.open:prefix",
+    "ctrl-shift-g": "mod.open:github"
   },
   "terminal": {
     "ctrl-backspace": "send:\u0017",
