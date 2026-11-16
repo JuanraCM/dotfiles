@@ -36,10 +36,9 @@
     "ctrl-shift-e": {"command": "terminal.open", "args": {"argv": ["nvim"], "place": "right"}}
   },
   "terminal": {
-    "ctrl-backspace": "send:\u0017",
-    "ctrl-left": "send:\u001bb",
-    "ctrl-right": "send:\u001bf",
+    "cmd-c": "terminal.copy",
+    "cmd-v": "terminal.paste",
     "ctrl-shift-c": "terminal.copy",
-    "ctrl-v": "terminal.paste"
+    "ctrl-shift-v": "terminal.paste"
   }
 }
