@@ -1,2 +1,5 @@
+.specs
 .nvim-env.json
 mise.toml
+
+**/.claude/settings.local.json
