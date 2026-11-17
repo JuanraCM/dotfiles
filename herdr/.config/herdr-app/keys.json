@@ -9,8 +9,8 @@
     "alt-7": "space.select:7",
     "alt-8": "space.select:8",
     "alt-9": "space.select:9",
-    "alt-down": "agent.next",
-    "alt-up": "agent.prev",
+    "alt-n": "agent.next",
+    "alt-p": "agent.prev",
     "ctrl-h": "pane.go:left",
     "ctrl-j": "pane.go:down",
     "ctrl-k": "pane.go:up",
@@ -33,6 +33,7 @@
     "ctrl-space": "mod.open:prefix",
     "ctrl-shift-g": "mod.open:github",
     "ctrl-shift-w": "mod.open:worktrees",
+    "ctrl-shift-l": "mod.open:linear",
     "ctrl-shift-e": {"command": "terminal.open", "args": {"argv": ["nvim"], "place": "right"}}
   },
   "terminal": {
