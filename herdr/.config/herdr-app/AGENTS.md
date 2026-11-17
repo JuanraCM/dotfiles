@@ -44,6 +44,7 @@ closeOverlay(props().overlay);
 | `create`, `base` | `switch` only. Set `create: true` to make a new branch from `base`. |
 | `focus` | `switch` only. Set `false` to open the space in the background. |
 | `label` | The text that the sidebar shows |
+| `argv`, `task`, `tab` | `switch` only. Start an agent (`argv`) in the worktree space with `task` as its first message, in a tab named `tab`. If the space is open, the agent starts in a new tab. |
 
 - Use a job only to create or remove a worktree. If the worktree exists, select its space. Do not add a job.
 - Make sure that `folder` is in the correct repo before you add the job.

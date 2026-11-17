@@ -7,8 +7,10 @@
 //
 // Other mods queue jobs through shared state (mods can't import each other):
 //   setShared("worktrees.jobs", { ...(shared("worktrees.jobs") ?? {}), [id]: job })
-//   { op: "switch", folder, target, create?, base?, focus?, label? }: wt switch <target> in folder (create:
-//     --create [--base] unless the branch exists), then shows the worktree's space (focus: false keeps the shown one).
+//   { op: "switch", folder, target, create?, base?, focus?, label?, argv?, task?, tab? }: wt switch <target> in folder
+//     (create: --create [--base] unless the branch exists), then shows the worktree's space (focus: false keeps the
+//     shown one). argv starts an agent there with task as its first message, in a tab named tab (a new tab if the
+//     space is already open).
 //   { op: "remove", folder, target, label? }: closes the worktree's spaces, then wt remove <target>.
 //   folder: any checkout of the repo; target: what wt takes (branch, pr:N, path); label: shown for target.
 // The status block adds state ("running" | "done" | "failed") and error, and drops finished jobs.
@@ -178,7 +180,8 @@ export default class Worktrees extends View {
     const target = create ? ["--create", job.target, ...(job.base ? ["--base", job.base] : [])] : [job.target];
     const { path } = await wt(job.folder, ["switch", ...target, "--no-cd"]);
     if (!path) throw new Error("worktrunk returned no worktree path");
-    this.show(path, job.focus ?? true, await this.paths(path));
+    const agent = job.argv?.length ? { argv: job.argv, task: job.task, tab: job.tab } : null;
+    this.show(path, job.focus ?? true, await this.paths(path), agent);
     return path;
   }
 
@@ -203,10 +206,12 @@ export default class Worktrees extends View {
   }
 
   // Selects the checkout's space, else opens one. Unnamed, so the spaces list nests it under its repo.
-  show(path, focus, all) {
+  // agent {argv, task, tab}: starts it there, in a new tab if the space is already open.
+  show(path, focus, all, agent = null) {
     const s = spacesAt(path, all)[0];
-    if (s && focus) run("space.select", { id: s.id });
-    else if (!s) run("space.new", { folder: path, focus });
+    if (s && agent) run("tab.new", { space: s.id, folder: path, name: agent.tab, argv: agent.argv, task: agent.task, focus });
+    else if (s && focus) run("space.select", { id: s.id });
+    else if (!s) run("space.new", { folder: path, focus, ...(agent && { tab: agent.tab, argv: agent.argv, task: agent.task }) });
   }
 
   renderStatus(cx) {
