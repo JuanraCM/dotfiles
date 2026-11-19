@@ -1,5 +1,5 @@
 // Worktrees through worktrunk (`wt`), so its hooks run. One mod, two roles:
-// - props {role: "status"}: the sidebar block "worktrees" (layouts/herdr.json). It runs every job and
+// - props {role: "status"}: the sidebar block "worktrees" (layouts/custom.json). It runs every job and
 //   shows its progress under the spaces list, growing the block only while there's something to show.
 // - otherwise (mod.open:worktrees, keys.json): a finder of the focused folder's repo worktrees.
 //   Switching to one is immediate; creating (n) and removing (d twice) run as jobs.

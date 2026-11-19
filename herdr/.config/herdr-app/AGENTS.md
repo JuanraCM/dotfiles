@@ -3,7 +3,7 @@
 Read `~/.config/herdr-app/AGENTS.md` first. It is Herdr's guide to the mod API.
 
 - Stow links this folder into `~/.config/herdr-app`. Run `stow herdr` from `~/dotfiles` after you add a file.
-- Edit `layouts/herdr.json`. Do not edit the shipped layouts or mods.
+- Edit `layouts/custom.json`. Do not edit the shipped layouts or mods.
 - After each mod change, run `herdr-app check ~/.config/herdr-app/mods/<name>`.
 
 ## Keys
@@ -48,5 +48,5 @@ closeOverlay(props().overlay);
 
 - Use a job only to create or remove a worktree. If the worktree exists, select its space. Do not add a job.
 - Make sure that `folder` is in the correct repo before you add the job.
-- Do not remove the `worktrees` block from `layouts/herdr.json`. That block runs the jobs.
+- Do not remove the `worktrees` block from `layouts/custom.json`. That block runs the jobs.
 - If you need a new operation, add it to `mods/worktrees/main.js`. Then update this section.
