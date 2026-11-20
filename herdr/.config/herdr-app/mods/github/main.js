@@ -4,7 +4,15 @@
 
 import { View, div } from "gpui-kit";
 import { v_flex, h_flex, ScrollHandle } from "gpui-base";
-import { exec, notify, shared, setShared, spaces, focused, theme, props, closeOverlay, nextCommand, checking } from "herdr";
+import { exec, notify, shared, setShared, spaces, focused, layout, theme, props, closeOverlay, nextCommand, checking } from "herdr";
+
+// The layout's focused-pane border: this overlay draws its own frame in it
+// (mod.json "frame": "none"), so it looks like a focused pane.
+function frameColor(t) {
+  const find = (node) => node?.id === "main" ? node : (node?.children ?? []).map(find).find(Boolean);
+  const color = find(layout())?.content?.pane?.focus?.color ?? "accent";
+  return t[color] ?? color;
+}
 
 const QUERY = `
 fragment pr on PullRequest {
@@ -149,7 +157,7 @@ export default class GitHub extends View {
   row(pr, index, t, showAuthor) {
     const [glyph, ci, ciColor] = ciOf(pr);
     const selected = index === this.at;
-    const badge = (text, color) => div().flex_none().px(6).rounded(4).text_size(11).border_1().border_color(color).text_color(color).child(text);
+    const badge = (text, color) => div().flex_none().px(6).text_size(11).border_1().border_color(color).text_color(color).child(text);
     return h_flex()
       .id(`pr-${pr.url}`)
       .h(30)
@@ -157,7 +165,6 @@ export default class GitHub extends View {
       .px(10)
       .gap(10)
       .items_center()
-      .rounded(6)
       .cursor_pointer()
       .when(selected, (s) => s.bg(t.selected))
       .hover((s) => s.bg(selected ? t.selected : t.hover))
@@ -212,7 +219,8 @@ export default class GitHub extends View {
       .min_h(0)
       .p(12)
       .gap(6)
-      .bg(props()?.overlay ? t.popover : t.background)
+      .bg(t.background)
+      .when(!!props()?.overlay, (s) => s.border(2).border_color(frameColor(t)))
       .text_size(13)
       .child(
         h_flex()

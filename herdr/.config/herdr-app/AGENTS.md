@@ -10,6 +10,14 @@ Read `~/.config/herdr-app/AGENTS.md` first. It is Herdr's guide to the mod API.
 
 Bind each pane or picker to a `ctrl-shift-<key>` key in `keys.json`. Read `keys.json` first, and use a key that is not in it.
 
+## Look
+
+Pickers and notifications look like the panes in `layouts/custom.json` (Omarchy style).
+
+- Set `"frame": "none"` in the picker's `mod.json` overlay.
+- Draw the frame in the mod: `.bg(t.background).border(2).border_color(frameColor(t))`. Copy `frameColor` from `mods/github`. It reads the focused-pane border color from the layout.
+- Do not use rounded corners.
+
 ## Keyboard control
 
 Each pane and picker must work from the keyboard only. Use `mods/github` and `mods/worktrees` as the models.

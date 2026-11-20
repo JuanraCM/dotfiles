@@ -1,1 +1,1 @@
-{ "place": "none", "title": "GitHub", "focusable": true, "overlay": { "kind": "popup", "at": "top", "offset": 40, "width": 760, "height": 0.7 } }
+{ "place": "none", "title": "GitHub", "focusable": true, "overlay": { "kind": "popup", "at": "top", "offset": 40, "width": 760, "height": 0.7, "frame": "none" } }

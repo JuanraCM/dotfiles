@@ -19,6 +19,14 @@ import { View, div } from "gpui-kit";
 import { v_flex, h_flex, ScrollHandle, InputState, Input } from "gpui-base";
 import { exec, run, notify, shared, setShared, spaces, panes, focused, layout, home, theme, props, closeOverlay, nextCommand, checking } from "herdr";
 
+// The layout's focused-pane border: this overlay draws its own frame in it
+// (mod.json "frame": "none"), so it looks like a focused pane.
+function frameColor(t) {
+  const find = (node) => node?.id === "main" ? node : (node?.children ?? []).map(find).find(Boolean);
+  const color = find(layout())?.content?.pane?.focus?.color ?? "accent";
+  return t[color] ?? color;
+}
+
 const KEY = "worktrees.jobs";
 const BLOCK = "worktrees";
 const ROW_H = 26;
@@ -366,7 +374,7 @@ export default class Worktrees extends View {
   row(c, index, t, all) {
     const selected = index === this.at;
     const job = this.jobOf(c);
-    const badge = (text, color) => div().flex_none().px(6).rounded(4).text_size(11).border_1().border_color(color).text_color(color).child(text);
+    const badge = (text, color) => div().flex_none().px(6).text_size(11).border_1().border_color(color).text_color(color).child(text);
     const open = spacesAt(c.path, all).length > 0;
     return h_flex()
       .id(`wt-${c.path}`)
@@ -375,7 +383,6 @@ export default class Worktrees extends View {
       .px(10)
       .gap(10)
       .items_center()
-      .rounded(6)
       .cursor_pointer()
       .when(selected, (s) => s.bg(t.selected))
       .hover((s) => s.bg(selected ? t.selected : t.hover))
@@ -413,7 +420,9 @@ export default class Worktrees extends View {
       .min_h(0)
       .p(12)
       .gap(6)
-      .bg(t.popover)
+      .bg(t.background)
+      .border(2)
+      .border_color(frameColor(t))
       .text_size(13)
       .child(
         h_flex()
@@ -439,8 +448,7 @@ export default class Worktrees extends View {
             .h(32)
             .px(10)
             .items_center()
-            .rounded(6)
-            .border(1)
+                  .border(1)
             .border_color(t.accent)
             .bg(t.background)
             .text_color(t.foreground),
