@@ -11,10 +11,10 @@
       "type": "row",
       "children": [
         {
-          "id": "waybar",
+          "id": "pane-bar",
           "type": "block",
           "content": {
-            "mod": "waybar"
+            "mod": "pane-bar"
           },
           "window_drag": true
         },

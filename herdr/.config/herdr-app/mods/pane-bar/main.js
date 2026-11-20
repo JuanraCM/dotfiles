@@ -1,4 +1,4 @@
-// An Omarchy-style Waybar: the shown space's tabs on the left, agents on the
+// The bar above the panes: the shown space's tabs on the left, agents on the
 // right, lined up with the panes' edges. Click a tab: select it.
 
 import { View, div } from "gpui-kit";
@@ -29,7 +29,7 @@ function edges() {
   return { left: Math.max(left, lights), right: pad };
 }
 
-export default class Waybar extends View {
+export default class PaneBar extends View {
   render(cx) {
     const t = theme();
     const shown = spaces().find((s) => s.active);
@@ -38,7 +38,7 @@ export default class Waybar extends View {
     for (const a of agents()) counts[a.status] = (counts[a.status] ?? 0) + 1;
 
     const tab = (tb) => div()
-      .id(`waybar-tab-${tb.id}`)
+      .id(`pane-bar-tab-${tb.id}`)
       .flex_none()
       .max_w(180)
       .truncate()
@@ -55,7 +55,7 @@ export default class Waybar extends View {
 
     const { left, right } = edges();
     return div()
-      .id("waybar")
+      .id("pane-bar")
       .size_full()
       .flex()
       .pt(GAP)
