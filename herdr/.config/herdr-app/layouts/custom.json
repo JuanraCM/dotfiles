@@ -145,10 +145,11 @@
     14,
     14
   ],
+  "resizable": false,
   "titlebar": "none",
   "traffic_lights": [
     12,
     16
   ],
-  "resizable": false
+  "toast": "notifications"
 }

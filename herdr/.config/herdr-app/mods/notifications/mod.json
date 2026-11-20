@@ -1,0 +1,9 @@
+{
+  "place": "none",
+  "title": "Notifications",
+  "overlay": { "frame": "none" },
+  "cloned_from": {
+    "name": "toast",
+    "version": "0.1.16"
+  }
+}
