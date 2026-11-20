@@ -33,7 +33,7 @@
         }
       ],
       "size": {
-        "px": 26
+        "px": 36
       },
       "resizable": false
     },
@@ -148,6 +148,7 @@
   "titlebar": "none",
   "traffic_lights": [
     12,
-    7
-  ]
+    16
+  ],
+  "resizable": false
 }
