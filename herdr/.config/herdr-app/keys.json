@@ -33,7 +33,6 @@
     "ctrl-space": "mod.open:prefix",
     "ctrl-shift-g": "mod.open:github",
     "ctrl-shift-w": "mod.open:worktrees",
-    "ctrl-shift-l": "mod.open:linear",
     "ctrl-shift-e": {"command": "terminal.open", "args": {"argv": ["nvim"], "place": "right"}}
   },
   "terminal": {
