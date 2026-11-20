@@ -17,19 +17,6 @@
             "mod": "pane-bar"
           },
           "window_drag": true
-        },
-        {
-          "id": "worktrees",
-          "type": "block",
-          "content": {
-            "mod": "worktrees",
-            "props": {
-              "role": "status"
-            }
-          },
-          "size": {
-            "px": 0
-          }
         }
       ],
       "size": {
@@ -55,6 +42,19 @@
                 "weight": 1
               },
               "min": 90
+            },
+            {
+              "id": "worktrees",
+              "type": "block",
+              "content": {
+                "mod": "worktrees",
+                "props": {
+                  "role": "status"
+                }
+              },
+              "size": {
+                "px": 0
+              }
             },
             {
               "id": "agents",
